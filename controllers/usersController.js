@@ -22,6 +22,100 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
+  // router.post('/', async (req, res) => {
+  //   try {
+  //     const userData = await User.create(req.body);
+  
+  //     req.session.save(() => {
+  //       req.session.user_id = userData.id;
+  //       req.session.use_name = userData.username;
+  //       req.session.logged_in = true;
+  
+  //       res.status(200).json(userData);
+  //     });
+  //   } catch (err) {
+  //     res.status(400).json(err);
+  //   }
+  // });
+
+  /// .findOne ///
+  alogin: async function(req, res) {
+    try {
+      const userData = await User.findOne({ where: { email: req.body.email } });
+      console.log(userData)
+  
+      if (!userData) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email or password, please try again' });
+        return;
+      }
+          /// Ensure .checkPassword method on User model
+      const validPassword = await userData.checkPassword(req.body.password);
+  
+      if (!validPassword) {
+        res
+          .status(400)
+          .json({ message: 'Incorrect email or password, please try again' });
+        return;
+      }
+  
+      req.session.save(() => {
+        req.session.user_id = userData.id;
+        req.session.use_name = userData.username;
+        req.session.logged_in = true;
+  
+        res.json({ user: userData, message: 'You are now logged in!' });
+      });
+    } catch (err) {
+      res.status(400).json(err);
+    }
+
+  },
+
+  /// .findOne ///
+  login: function(req, res) { 
+    db.User
+      .findOne({ where: { email: req.body.email } }, req.body)
+      .then(dbModel => {
+        if (!dbModel) {
+          res
+            .status(400)
+            .json({ message: 'Incorrect email or password, please try again' });
+          return;
+        }
+            /// Ensure .checkPassword method on User model
+        const validPassword = await dbModel.checkPassword(req.body.password);
+        if (!validPassword) {
+          res
+            .status(400)
+            .json({ message: 'Incorrect email or password, please try again' });
+          return;
+        }
+        req.session.save(() => {
+          req.session.user_id = dbModel.id;
+          req.session.use_name = dbModel.username;
+          req.session.logged_in = true;
+    
+          res.json(dbModel);
+        });
+
+      })
+      .catch(err => res.status(422).json(err));
+  },
+
+  logout: function (req, res) {
+    if (req.session.logged_in) {
+      req.session.destroy(() => {
+        res.status(204).end();
+      });
+    } else {
+      res.status(404).end();
+    }
+  },
+
+
   update: function(req, res) {
     db.User
       .findOneAndUpdate({ _id: req.params.id }, req.body)

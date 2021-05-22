@@ -1,10 +1,61 @@
 const router = require('express').Router();
 const usersController = require("../../controllers/usersController");
 
+///// Need to require session on server.js and include following 
+///// boiler plate to server.js file
+//  More boilerplate options for session({sess}) info below, see:
+  // * https://www.npmjs.com/package/express-session#resave
+  // * https://www.npmjs.com/package/express-session#saveuninitialized
+//////////////////////////////////////
+//////////////////////////////////////////////////////
+
+// const express = require('express');
+// const session = require('express-session');
+// const MongoDBStore = require('connect-mongodb-session')(session);
+ 
+
+// const store = new MongoDBStore({
+//   uri: 'mongodb://localhost/mullet',
+//   collection: 'mulletSession'
+// });
+ 
+// // Catch errors
+// store.on('error', function(error) {
+//   console.log(error);
+// });
+ 
+// app.use(session({
+//   secret: 'super secret secret',
+//   cookie: {
+//     // 1 hour
+//     maxAge: 1000 * 60 * 60 * 1
+//   },
+//   store: store,
+
+//   resave: false,
+//   saveUninitialized: true
+// }));
+ 
+
+
+////////////////////////////////////////////////////// 
+
+
 // Matches with "/api/users"
 router.route("/")
   .get(usersController.findAll)
   .post(usersController.create);
+
+
+  // Matches with "/api/users/login"
+  // Alternative with async/await function:
+  // .post(usersController.alogin) 
+router.route("/login")
+  .post(usersController.login);
+
+// Matches with "/api/users/logout"
+router.route("/logout")
+  .post(usersController.logout);
 
 // Matches with "/api/users/:id"
 router
@@ -12,67 +63,5 @@ router
   .get(usersController.findById)
   .put(usersController.update)
   .delete(usersController.remove);
-
-module.exports = router;
-
-
-router.post('/', async (req, res) => {
-  try {
-    const userData = await User.create(req.body);
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.use_name = userData.username;
-      req.session.logged_in = true;
-
-      res.status(200).json(userData);
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.post('/login', async (req, res) => {
-  try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
-    console.log(userData)
-
-    if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-
-    const validPassword = await userData.checkPassword(req.body.password);
-
-    if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
-      return;
-    }
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.use_name = userData.username;
-      req.session.logged_in = true;
-
-      res.json({ user: userData, message: 'You are now logged in!' });
-    });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-router.post('/logout', (req, res) => {
-  if (req.session.logged_in) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
 
 module.exports = router;
