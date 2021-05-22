@@ -6,20 +6,20 @@ module.exports = {
   findAll: function(req, res) {
     db.User
       .find(req.query)
-      .sort({ date: -1 })
-      .then(dbModel => res.json(dbModel))
+      .sort({ _id: -1 })
+      .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
     db.User
       .findById(req.params.id)
-      .then(dbModel => res.json(dbModel))
+      .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
     db.User
       .create(req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   },
 
@@ -78,15 +78,15 @@ module.exports = {
   login: function(req, res) { 
     db.User
       .findOne({ where: { email: req.body.email } }, req.body)
-      .then(dbModel => {
-        if (!dbModel) {
+      .then(dbUserData => {
+        if (!dbUserData) {
           res
             .status(400)
             .json({ message: 'Incorrect email or password, please try again' });
           return;
         }
             /// Ensure .checkPassword method on User model
-        const validPassword = await dbModel.checkPassword(req.body.password);
+        const validPassword = await dbUserData.checkPassword(req.body.password);
         if (!validPassword) {
           res
             .status(400)
@@ -94,11 +94,11 @@ module.exports = {
           return;
         }
         req.session.save(() => {
-          req.session.user_id = dbModel.id;
-          req.session.use_name = dbModel.username;
+          req.session.user_id = dbUserData.id;
+          req.session.use_name = dbUserData.username;
           req.session.logged_in = true;
     
-          res.json(dbModel);
+          res.json(dbUserData);
         });
 
       })
@@ -119,14 +119,14 @@ module.exports = {
   update: function(req, res) {
     db.User
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
     db.User
       .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
-      .then(dbModel => res.json(dbModel))
+      .then(dbUserData => dbUserData.remove())
+      .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   }
 };

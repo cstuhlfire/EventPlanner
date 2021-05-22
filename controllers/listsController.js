@@ -1,38 +1,37 @@
 const db = require("../models");
 
-// Calling Schema Event for now
-// Defining methods for the booksController
+// Defining methods for the listsController
 module.exports = {
   findAll: function(req, res) {
-    db.Events
+    db.List
       .find(req.query)
-      .sort({ date: -1 })
-      .then(dbEventData => res.json(dbEventData))
+      .sort({ _id: -1 })
+      .then(dbListData => res.json(dbListData))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Book
+    db.List
       .findById(req.params.id)
-      .then(dbEventData => res.json(dbEventData))
+      .then(dbListData => res.json(dbListData))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Book
+    db.List
       .create(req.body)
-      .then(dbEventData => res.json(dbEventData))
+      .then(dbListData => res.json(dbListData))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Book
+    db.List
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbEventData => res.json(dbEventData))
+      .then(dbListData => res.json(dbListData))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Book
+    db.List
       .findById({ _id: req.params.id })
-      .then(dbEventData => dbEventData.remove())
-      .then(dbEventData => res.json(dbEventData))
+      .then(dbListData => dbListData.remove())
+      .then(dbListData => res.json(dbListData))
       .catch(err => res.status(422).json(err));
   }
 };
