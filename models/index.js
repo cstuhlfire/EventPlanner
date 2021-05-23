@@ -1,3 +1,12 @@
+// Export data models
 module.exports = {
-  Book: require("./book")
+  Users: require("./users")
 };
+
+module.exports = {
+  Events: require("./events")
+};
+
+// module.exports = {
+//   Book: require("./book")
+// };
