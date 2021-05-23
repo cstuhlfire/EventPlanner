@@ -7,7 +7,7 @@ import LockIcon from '@material-ui/icons/Lock';
     return (
         <div id="column">
             
-            
+        <div className="column">
 
             {/* This is the left column */}
              
@@ -59,6 +59,7 @@ import LockIcon from '@material-ui/icons/Lock';
         
     </div>
     </div>
+</div>
 )}
 
 export default Login;
