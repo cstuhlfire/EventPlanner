@@ -7,6 +7,10 @@ module.exports = {
   Events: require("./events")
 };
 
-// module.exports = {
+module.exports = {
+  ListTypes: require("./list")
+};
+
+// modu11le.exports = {
 //   Book: require("./book")
 // };
