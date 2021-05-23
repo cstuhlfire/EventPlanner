@@ -1,0 +1,45 @@
+:root {
+    --dark-purple: #301934;
+  
+}
+#root {
+    height: 100vh;
+}
+
+ #column {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right,  rgb(0, 219, 222), rgb(252, 0, 255));
+    position: relative;
+    padding-bottom: 30%;
+}
+
+.head {
+    margin: auto;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.email {
+    padding: 1%;
+}
+.cont {
+    z-index: 201;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: white;
+    box-shadow: 5px 5px linear-gradient(darkgray, lightgray);
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 80%;
+    text-align: center;
+}
+
+.button {
+    width: 95%;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(right, rgb(0, 219, 222), rgb(252, 0, 255)) !important;
+   
+}
+
