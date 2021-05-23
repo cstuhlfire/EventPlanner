@@ -1,15 +1,10 @@
-// Export data models
+// Export data models 
 module.exports = {
-  Users: require("./users")
+  Users: require("./users"),
+  Events: require("./events"),
+ // Lists: require("./lists")
 };
 
-module.exports = {
-  Events: require("./events")
-};
-
-module.exports = {
-  ListTypes: require("./list")
-};
 
 // modu11le.exports = {
 //   Book: require("./book")
