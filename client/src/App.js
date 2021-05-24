@@ -1,28 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Books from "./pages/Books";
-import Detail from "./pages/Detail";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import Login from "./pages/Login";
+import CreateAccount from "./pages/CreateAccount"
+import "./App.css"
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Nav />
-        <Switch>
-          <Route exact path={["/", "/books"]}>
-            <Books />
+      <>
+        <Router>
+          <Switch>
+          <Route exact path="/login">
+            <Login />
           </Route>
-          <Route exact path="/books/:id">
-            <Detail />
+          <Route exact path="/CreateAccount">
+            <CreateAccount />
           </Route>
-          <Route>
-            <NoMatch />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+          </Switch>
+        </Router>
+      </>
   );
 }
 
