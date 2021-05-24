@@ -7,23 +7,24 @@
     height: 100vh;
 }
 
-
-.head {
-    margin: auto;
-    text-align: center;
-    padding-bottom: 15px;
-    font-family: 'Josefin Sans';
-    font-weight: bold;
-    color: purple;  
-}
-
 #column {
     height: 100%;
     width: 100%;
     background-image: linear-gradient(to right,  rgb(0, 219, 222), rgb(252, 0, 255));
     position: relative;
     padding-bottom: 30%;
-    padding-top: 10%;  
+    padding-top: 10%;
+    
+}
+
+.head {
+    margin: auto;
+    text-align: center;
+    padding-bottom: 15px;
+    font-family: 'Josefin Sans';
+    color: purple;
+    font-weight: bold;
+   
 }
 
 .email {
@@ -41,7 +42,6 @@
     margin-bottom: 80%;
     text-align: center;
     border-radius: 2%;
-
 }
 
 .button {
