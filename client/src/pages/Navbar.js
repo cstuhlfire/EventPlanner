@@ -25,10 +25,10 @@ function Navbar() {
                     <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="LandS">
-                        <a className="LandS">
+                        <a href="/createaccount" className="LandS">
                             <strong> Sign up | </strong>
                         </a>
-                        <a className="LandS">
+                        <a href="/login" className="LandS">
                             Log in 
                         </a>
                         </div>
