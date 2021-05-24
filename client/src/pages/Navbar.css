@@ -1,0 +1,12 @@
+.navbar {
+    background-image: linear-gradient(to right,  rgb(0, 219, 222), rgb(252, 0, 255));   
+}
+
+.navbar-item  {
+    color: white;
+    font-weight: bold;
+}
+.LandS  {
+    color: white;
+    font-weight: bold;
+}
