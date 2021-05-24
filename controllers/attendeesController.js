@@ -1,37 +1,38 @@
 const db = require("../models");
 
-// Defining methods for the actionsController
+// Calling Schema Event for now
+// Defining methods for the attendeesController
 module.exports = {
   findAll: function(req, res) {
-    db.Event
+    db.Attendee
       .find(req.query)
-      .sort({ event_id: -1 })
-      .then(dbAnnouncementData => res.json(dbAnnouncementData))
+      .sort({ date: -1 })
+      .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Event
+    db.Attendee
       .findById(req.params.id)
-      .then(dbAnnouncementData => res.json(dbAnnouncementData))
+      .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Event
+    db.Attendee
       .create(req.body)
-      .then(dbAnnouncementData => res.json(dbAnnouncementData))
+      .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Event
+    db.Attendee
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbAnnouncementData => res.json(dbAnnouncementData))
+      .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Event
+    db.Attendee
       .findById({ _id: req.params.id })
-      .then(dbAnnouncementData => dbAnnouncementData.remove())
-      .then(dbAnnouncementData => res.json(dbAnnouncementData))
+      .then(dbEventData => dbEventData.remove())
+      .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   }
 };
