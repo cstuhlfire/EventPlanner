@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 db.Events.find({}).populate("attendees.attendee")
 .then(dbEvents => {
-  console.log(dbEvents);
+  dbEvents.forEach((event) => console.log(event.attendees));
   process.exit(0);
 })
 .catch(err => {

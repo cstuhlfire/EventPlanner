@@ -1,0 +1,73 @@
+:root {
+    --dark-purple: #301934;
+    font-family: 'Josefin Sans';
+    
+}
+#root {
+    height: 100vh;
+}
+
+
+.head {
+    margin: auto;
+    text-align: center;
+    padding-bottom: 15px;
+    font-family: 'Josefin Sans';
+    font-weight: bold;
+    color: purple;  
+}
+
+#column {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(to right,  rgb(0, 219, 222), rgb(252, 0, 255));
+    position: relative;
+    padding-bottom: 30%;
+    padding-top: 10%;  
+}
+
+.email {
+    padding: 1%;
+}
+.cont {
+    z-index: 201;
+    padding-top: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: white;
+    box-shadow: 5px 5px linear-gradient(darkgray, lightgray);
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-bottom: 80%;
+    text-align: center;
+    border-radius: 2%;
+
+}
+
+.button {
+    padding: 15px 25px;
+    font-size: 24px;
+    text-align: center;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    background-image: linear-gradient(to right, rgb(0, 219, 222),	rgb(252, 0, 255));
+    border: none;
+    border-radius: 15px; 
+}
+
+.button:hover {
+    background-color: purple
+}
+
+.button:active {
+  background-color: purple;
+  transform: translateY(4px);
+}
+
+#createLink {
+    font-family: 'Josefin Sans';
+    color: purple;
+}
+   
+
