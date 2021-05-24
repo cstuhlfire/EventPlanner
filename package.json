@@ -10,6 +10,7 @@
     "client": "cd client && npm run start",
     "userseed": "node scripts/usersSeed.js",
     "eventsseed": "node scripts/eventsSeed.js",
+    "testDB": "node scripts/testDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"

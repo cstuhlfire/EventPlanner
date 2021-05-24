@@ -29,3 +29,19 @@ db.Events
     console.error(err);
     process.exit(1);
   });
+
+//   db.Events.find({
+//     UserId: userId,
+//     shopId: shopId
+// }).populate('productDetails.productId').skip(pagination.skip).limit(pagination.limit).exec(function (error, CartList) {
+
+ 
+// });
+
+db.Events.find({})
+.then(dbEvents => {
+  console.log(dbEvents);
+})
+.catch(err => {
+  console.log(err);
+});
