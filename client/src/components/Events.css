@@ -1,0 +1,17 @@
+.media {
+    display: flex;
+    justify-content: center !important;
+    text-align: center;
+    padding: 5%;
+}
+
+.container {
+    align-items: center;  
+}
+
+.columns {
+    padding-top: 5%;
+    align-items: center;
+    margin-left: 15%;
+    margin-right: 10%;
+}
