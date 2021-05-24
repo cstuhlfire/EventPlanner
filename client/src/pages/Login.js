@@ -2,7 +2,7 @@ import React from 'react'
 import "./Login.css"
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import LockIcon from '@material-ui/icons/Lock';
-import MailOutlineIcon from '@material-ui/icons/MailOutline';
+
 
  function Login() {
     return (
@@ -13,7 +13,7 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
                  {/* Form Starts Here */}
             <div clasName="column">
                 <div>
-                    <h3 className="head">Log In</h3>
+                    <h3 className="head">Login</h3>
                 </div>
                  <div className="email field">
                      <p className="control has-icons-left has-icons-right">
