@@ -35,18 +35,46 @@ const eventsSchema = new Schema({
             type: String,
             trim: true
         },
-        itemName: {
-            type: String,
-            trim: true
-        },
-        assignedTo: {
-            type: Schema.Types.ObjectId,
-            ref: "Users"
-        },
-        status: {
-            type: String,
-            trim: true
-        }
+        items: [
+          {
+              itemName: {
+                  type: String,
+                  trim: true
+              },
+              assignedTo: {
+                  type: Schema.Types.ObjectId,
+                  ref: "Users"
+              },
+              status: {
+                  type: String,
+                  trim: true
+              }
+          }
+        ]
+    }
+  ],
+  announcements: [
+    {
+      author: {
+        type: Schema.Types.ObjectId,
+        ref: "Users"
+      },
+      text: {
+        type: String,
+        trim: true        
+      }
+    }
+  ],
+  comments: [
+    {
+      author: {
+        type: Schema.Types.ObjectId,
+        ref: "Users"
+      },
+      text: {
+        type: String,
+        trim: true        
+      }
     }
   ]
 },

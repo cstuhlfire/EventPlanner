@@ -23,23 +23,57 @@ const eventsSeed = [
       lists: [
         {
             listName: "Food",
-            itemName: "Cake",
-            assignedTo: "60aa0d362479e80938f30159",
-            status: "ordered"
+            items: [
+                {
+                    itemName: "Cake",
+                    assignedTo: "60aa0d362479e80938f30159",
+                    status: "ordered"
+                },
+                {
+                    itemName: "Fruit",
+                    assignedTo: "60aa0d362479e80938f30159",
+                    status: "ordered"
+                },
+                {
+                    itemName: "Snacks",
+                    assignedTo: "",
+                    status: "open"
+                }
+            ]
         },
         {
-            listName: "Food",
-            itemName: "Fruit",
-            assignedTo: "60aa0d362479e80938f30159",
-            status: "ordered"
-        },        
-        {
             listName: "Supplies",
-            itemName: "Party hats",
-            assignedTo: "60aa0d362479e80938f3015b",
-            status: "done"
+            items: [
+                {
+                    itemName: "Party hats",
+                    assignedTo: "60aa0d362479e80938f3015b",
+                    status: "done"
+                },
+                {
+                    itemName: "Paper plates",
+                    assignedTo: "60aa0d362479e80938f30159",
+                    status: "done"
+                },
+                {
+                    itemName: "Napkins",
+                    assignedTo: "60aa0d362479e80938f30159",
+                    status: "done"
+                }
+            ]
         }
-      ]
+      ],
+      announcements: [
+          {
+            author: "60aa0d362479e80938f3015b",
+            text: "Sign up to bring snacks"
+          }
+      ],
+      comments: [
+        {
+          author: "60aa0d362479e80938f3015b",
+          text: "The party will be fun."
+        }
+    ]
     }
   ];
 
