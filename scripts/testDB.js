@@ -11,41 +11,44 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
   useFindAndModify: false });
 
   // create a user a new user
-let testUser = new User({
-  username: jmar777,
-  password: Password
+let testUser = new db.Users({
+  username: "jmar777",
+  password: "Password"
 });
 
 // save user to database
-testUser.save(function(err) {
-  if (err) throw err;
+testUser.save()
+  .then (newUser => {
+    console.log(newUser);
+
+  });
 
 // fetch user and test password verification
-User.findOne({ username: 'jmar777' }, function(err, user) {
-  if (err) throw err;
+// db.Users.findOne({ username: 'jmar777' }, function(err, user) {
+//   if (err) throw err;
 
-  // test a matching password
-  user.comparePassword('Password123', function(err, isMatch) {
-      if (err) throw err;
-      console.log('Password123:', isMatch); // -> Password123: true
+//   // test a matching password
+//   user.comparePassword('Password123', function(err, isMatch) {
+//       if (err) throw err;
+//       console.log('Password123:', isMatch); // -> Password123: true
+//   });
+
+//   // test a failing password
+//   user.comparePassword('123Password', function(err, isMatch) {
+//       if (err) throw err;
+//       console.log('123Password:', isMatch); // -> 123Password: false
+//   });
+// });
+
+  db.Users.findOne({username: "jmar777"})
+  .then(dbUsers => {
+    console.log(dbUsers);
+    process.exit(0);
+  })
+  .catch(err => {
+    console.log(err);
+    process.exit(1);
   });
-
-  // test a failing password
-  user.comparePassword('123Password', function(err, isMatch) {
-      if (err) throw err;
-      console.log('123Password:', isMatch); // -> 123Password: false
-  });
-});
-
-  // db.Users.find({})
-  // .then(dbUsers => {
-  //   console.log(dbUsers);
-  //   process.exit(0);
-  // })
-  // .catch(err => {
-  //   console.log(err);
-  //   process.exit(1);
-  // });
 
 // db.Events.find({}).populate("attendees.attendee")
 // .then(dbEvents => {
