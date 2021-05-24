@@ -75,35 +75,35 @@ module.exports = {
   },
 
   /// .findOne ///
-  login: function(req, res) { 
-    db.User
-      .findOne({ where: { email: req.body.email } }, req.body)
-      .then(dbUserData => {
-        if (!dbUserData) {
-          res
-            .status(400)
-            .json({ message: 'Incorrect email or password, please try again' });
-          return;
-        }
-            /// Ensure .checkPassword method on User model
-        const validPassword = await dbUserData.checkPassword(req.body.password);
-        if (!validPassword) {
-          res
-            .status(400)
-            .json({ message: 'Incorrect email or password, please try again' });
-          return;
-        }
-        req.session.save(() => {
-          req.session.user_id = dbUserData.id;
-          req.session.use_name = dbUserData.username;
-          req.session.logged_in = true;
+  // login: function(req, res) { 
+  //   db.User
+  //     .findOne({ where: { email: req.body.email } }, req.body)
+  //     .then(dbUserData => {
+  //       if (!dbUserData) {
+  //         res
+  //           .status(400)
+  //           .json({ message: 'Incorrect email or password, please try again' });
+  //         return;
+  //       }
+  //           /// Ensure .checkPassword method on User model
+  //       const validPassword = await dbUserData.checkPassword(req.body.password);
+  //       if (!validPassword) {
+  //         res
+  //           .status(400)
+  //           .json({ message: 'Incorrect email or password, please try again' });
+  //         return;
+  //       }
+  //       req.session.save(() => {
+  //         req.session.user_id = dbUserData.id;
+  //         req.session.use_name = dbUserData.username;
+  //         req.session.logged_in = true;
     
-          res.json(dbUserData);
-        });
+  //         res.json(dbUserData);
+  //       });
 
-      })
-      .catch(err => res.status(422).json(err));
-  },
+  //     })
+  //     .catch(err => res.status(422).json(err));
+  // },
 
   logout: function (req, res) {
     if (req.session.logged_in) {

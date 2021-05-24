@@ -11,25 +11,25 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.Event
+    db.Events
       .findById(req.params.id)
       .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Event
+    db.Events
       .create(req.body)
       .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Event
+    db.Events
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.Event
+    db.Events
       .findById({ _id: req.params.id })
       .then(dbEventData => dbEventData.remove())
       .then(dbEventData => res.json(dbEventData))
