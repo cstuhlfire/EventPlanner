@@ -1,0 +1,8 @@
+.testimonial {
+    background-image: url("../utils/images/balloons.jpg");
+    color: white;
+    font-weight: bold;
+    padding: 10%;
+    text-align: center;
+    border-bottom: 5px solid blueviolet;
+}
