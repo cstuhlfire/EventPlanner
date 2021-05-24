@@ -31,30 +31,8 @@ const eventsSchema = new Schema({
   ],
   lists: [
     {
-        listName: {
-            type: String,
-            trim: true
-        },
-        items: [
-          {
-              itemName: {
-                  type: String,
-                  trim: true
-              },
-              assignedTo: {
-                  type: Schema.Types.ObjectId,
-                  ref: "Users"
-              },
-              status: {
-                  type: String,
-                  trim: true
-              },
-              assigned: {
-                type: Boolean,
-                default: false
-            }
-          }
-        ]
+          type: Schema.Types.ObjectId,
+          ref: "Lists"
     }
   ],
   announcements: [

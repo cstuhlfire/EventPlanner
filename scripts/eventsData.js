@@ -27,17 +27,20 @@ const eventsSeed = [
                 {
                     itemName: "Cake",
                     assignedTo: "60aa0d362479e80938f30159",
-                    status: "ordered"
+                    status: "ordered",
+                    assigned: true
                 },
                 {
                     itemName: "Fruit",
                     assignedTo: "60aa0d362479e80938f30159",
-                    status: "ordered"
+                    status: "ordered",
+                    assigned: true
                 },
                 {
                     itemName: "Snacks",
-                    assignedTo: "",
-                    status: "open"
+                    assignedTo: "60aa0d362479e80938f30159",
+                    status: "open",
+                    assigned: false
                 }
             ]
         },
@@ -47,17 +50,20 @@ const eventsSeed = [
                 {
                     itemName: "Party hats",
                     assignedTo: "60aa0d362479e80938f3015b",
-                    status: "done"
+                    status: "done",
+                    assigned: true
                 },
                 {
                     itemName: "Paper plates",
                     assignedTo: "60aa0d362479e80938f30159",
-                    status: "done"
+                    status: "done",
+                    assigned: true
                 },
                 {
                     itemName: "Napkins",
                     assignedTo: "60aa0d362479e80938f30159",
-                    status: "done"
+                    status: "done",
+                    assigned: true
                 }
             ]
         }
