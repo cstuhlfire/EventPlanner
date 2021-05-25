@@ -20,6 +20,9 @@ export default {
   saveUser: function(userData) {
     return axios.post("/api/users", userData);
   },
+  checkUser: function(userData){
+    return axios.get("/api/users", userData)
+  }
   // getEvents: function(){
   //   return axios.get("/api/events");
   // },

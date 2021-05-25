@@ -45,9 +45,9 @@ module.exports = {
   // });
 
   /// .findOne ///
-  alogin: async function(req, res) {
+  login: async function(req, res) {
     try {
-      const userData = await User.findOne({ where: { email: req.body.email } });
+      const userData = await db.Users.findOne({ username: req.body.username });
       console.log(userData)
   
       if (!userData) {
@@ -56,8 +56,14 @@ module.exports = {
           .json({ message: 'Incorrect email or password, please try again' });
         return;
       }
-          /// Ensure .checkPassword method on User model
-      const validPassword = await userData.checkPassword(req.body.password);
+      // Ensure instance method .checkPassword is on User model
+      // const validPassword = await userData.comparePassword(req.body.password);
+
+
+      await userData.comparePassword(req.body.password, function(err, validPassword){
+        if (err) throw err;
+        console.log(req.body.password, validPassword)
+      });
   
       if (!validPassword) {
         res
@@ -65,14 +71,15 @@ module.exports = {
           .json({ message: 'Incorrect email or password, please try again' });
         return;
       }
+      
+      console.log("Success!");
+      // req.session.save(() => {
+      //   req.session.user_id = userData.id;
+      //   req.session.use_name = userData.username;
+      //   req.session.logged_in = true;
   
-      req.session.save(() => {
-        req.session.user_id = userData.id;
-        req.session.use_name = userData.username;
-        req.session.logged_in = true;
-  
-        res.json({ user: userData, message: 'You are now logged in!' });
-      });
+      //   res.json({ user: userData, message: 'You are now logged in!' });
+      // });
     } catch (err) {
       res.status(400).json(err);
     }

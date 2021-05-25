@@ -2,9 +2,27 @@ import React from 'react'
 import "./Login.css"
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import LockIcon from '@material-ui/icons/Lock';
+import API from "../utils/API";
 
 
  function Login() {
+
+    function logUserIn (event) {
+        event.preventDefault();
+
+        let userinput = document.querySelector(`#username`).value;
+        let passwordinput = document.querySelector(`#password`).value;
+        console.log(userinput);
+        console.log(passwordinput);
+
+        API.checkUser({
+            username: userinput,
+            password: passwordinput
+        })
+    } 
+
+
+
 
 
     return (
@@ -20,7 +38,7 @@ import LockIcon from '@material-ui/icons/Lock';
                  <div className="email field">
                      <p className="control has-icons-left has-icons-right">
                         <input 
-                            className="box email-input input" type="email" placeholder="Username">
+                            className="box email-input input" type="email" id="username" placeholder="Username">
                         </input>
                             <span className="icon is-small is-left">
                                 <PermIdentityIcon></PermIdentityIcon>
@@ -32,7 +50,7 @@ import LockIcon from '@material-ui/icons/Lock';
                 </div>
              <div className="field">
                 <p className="email control has-icons-left">
-                    <input className="box pass-input input" type="password" placeholder="Password"></input>
+                    <input className="box pass-input input" type="password" id="password" placeholder="Password"></input>
                     <span className="icon is-small is-left">
                         <LockIcon style={{fontSize: "large"}}></LockIcon>
                     </span>
@@ -40,7 +58,7 @@ import LockIcon from '@material-ui/icons/Lock';
                 </div>
                 <div className="field">
                     <p className="control">
-                     <button className="button is-success">
+                     <button className="button is-success" onClick={logUserIn}>
                          Login
                      </button>
                     </p>
