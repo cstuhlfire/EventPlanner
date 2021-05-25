@@ -11,6 +11,27 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
   useFindAndModify: false });
 
 
+  /////////// Testing Create Event
+// let reqbody = {
+//   eventName: "Underwater Basket Weaving – World Championship",
+//   location: "Atlantis, Online",
+//   description: "Join us as we find the world's next best underwater basket weaver!",
+//   eventDateTime: Date(2021-05-25),
+//   lists: [],
+//   announcements: [],
+//   comments: []
+// }
+
+//   // create: function(req, res) {
+// db.Events
+//       .create(reqbody)
+//       .then(dbEventData => console.log(dbEventData))
+//       .catch(err => console.log(err));
+
+
+
+
+
 
 /// unpopulated attendees
 // db.Events
@@ -20,11 +41,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 //       .catch(err => console.log(err));
 
 
-//// unpopulated lists
+// unpopulated lists
 // db.Events
 //       .find({})
-//       .sort({ date: -1 })
-//       .then(dbEventData => console.log(dbEventData[0].lists[0].items))
+//       .then(dbEventData => console.log(dbEventData))
 //       .catch(err => console.log(err));
 
 
@@ -37,8 +57,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 
 // selects just the eventName field
-db.Events.findOne().select('eventName, location, description')
-    .then(dbEvent => console.log(dbEvent));
+// db.Events.findOne().select('eventName, location, description')
+//     .then(dbEvent => console.log(dbEvent));
 
 
 // populated Events
@@ -80,3 +100,16 @@ db.Events.findOne().select('eventName, location, description')
 //   console.log(err);
 //   process.exit(1);
 // });
+
+
+
+
+
+//////////////////// Testing delete Event
+let reqparamsid = "60ad3abd2059fd0abbe71dc6"
+
+db.Events
+      .findById({ _id: reqparamsid })
+      .then(dbEventData => dbEventData.remove())
+      .then(dbEventData => console.log(dbEventData))
+      .catch(err => console.log(err));

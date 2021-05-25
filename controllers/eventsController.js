@@ -88,7 +88,63 @@ module.exports = {
       res.status(422).json(err);
     });
 
-  }
+  },
+  removeList: function(req, res) {
+    db.Events
+      // .findById({ _id: req.params.id })
+    .findOne({id: req.params.id})
+    .populate({
+      path: "lists.items",
+      populate: "assignedTo"
+    })
+    .populate("attendees.attendee")
+    .populate("announcements.author")
+    .populate("comments.author")
+    
+    .then(dbEvent => dbEvent.lists.forEach(list => {
+      list.remove({listName: req.params.listName})})
+    .then(dbEvent => res.json(dbEvent)))
+    .catch(err => res.status(422).json(err));
+
+  },
+  removeAttendee: function(req, res) {
+    db.Events
+      // .findById({ _id: req.params.id })
+    .findOne({id: req.params.id})
+    .populate({
+      path: "lists.items",
+      populate: "assignedTo"
+    })
+    .populate("attendees.attendee")
+    .populate("announcements.author")
+    .populate("comments.author")
+    
+    .then(dbEvent => dbEvent.attendees.forEach(attendee => {
+      attendee.remove({username: req.params.username})
+    }))
+    .then(dbEvent => res.json(dbEvent))
+    .catch(err => res.status(422).json(err));
+
+  },
+  deleteAnnouncement: function(req, res) {
+    db.Events
+      // .findById({ _id: req.params.id })
+    .findOne({id: req.params.id})
+    .populate({
+      path: "lists.items",
+      populate: "assignedTo"
+    })
+    .populate("attendees.attendee")
+    .populate("announcements.author")
+    .populate("comments.author")
+    
+    .then(dbEvent => dbEvent.announcements.forEach(announcement => {
+      announcement.remove({_id: req.params.announcementid})
+    }))
+    .then(dbEvent => res.json(dbEvent))
+    .catch(err => res.status(422).json(err));
+
+  },
 
 
 
