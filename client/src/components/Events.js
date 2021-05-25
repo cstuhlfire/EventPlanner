@@ -21,7 +21,9 @@ function Events() {
             <div class="card-content">
               <div class="content">
                 <h4> props.title</h4>
-                <p> props.description</p>
+                <p> props.date</p>
+                <p> props.time</p>
+                <p> props.Loation</p>
                 <span class="button is-link modal-button" data-target="modal-image2">View Event</span>
               </div>
             </div>

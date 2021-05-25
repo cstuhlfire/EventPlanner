@@ -40,10 +40,10 @@ function Navbar() {
                 </div>
                 <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
-                    <a className="navbar-item">
+                    <a href="/" className="navbar-item">
                         Home
                     </a>
-                    <a className="navbar-item">
+                    <a href="/createevent" className="navbar-item">
                         Create Event
                     </a>
                     </div>

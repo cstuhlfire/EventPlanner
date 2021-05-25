@@ -1,0 +1,28 @@
+h1 {
+    text-align: center;
+    color: blueviolet;
+
+}
+.h1 {
+    padding-top: 3%;
+}
+
+.name {
+    padding-top: 1%;
+}
+
+.btnCont {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+}
+.subbttn {
+    margin-top: 3%;
+    padding-left: 40%;
+    padding-right: 40%;
+   
+}
+.label {
+    color: blueviolet;
+}
