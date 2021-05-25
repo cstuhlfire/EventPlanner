@@ -36,7 +36,7 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findAllEvents: function (req, res) {
-
+    console.log("entered eventsController/findAllEvents")
     db.Events.find({})
     .populate({
         path: "lists.items",
@@ -47,13 +47,28 @@ module.exports = {
       .populate("comments.author")
     .populate("attendees.attendee")
     .then(dbEvents => {
-      let result = dbEvents.map((event) => 
-        (event.attendees).map(((guest) => guest.attendee.username)));
-      console.log(result);
+
+      console.log(dbEvents);
+      dbEvents.forEach(dbEvent => {
+         
+        console.log("entire event instance: \n-----------------\n" + dbEvent);
+        dbEvent.lists.forEach((list) => console.log("Lists for event instance: \n-----------------\n" +list.items));
+        dbEvent.attendees.forEach((attendee) => console.log("Attendee (each) for event instance: \n-----------------\n" +attendee));
+        dbEvent.announcements.forEach((announcement) => console.log("Announcement (each) for event instance: \n-----------------\n" +announcement));
+        dbEvent.comments.forEach((comment) => console.log("Comment (each) for event instance: \n-----------------\n" +comment));
+       
+       }
+      )
+      res.json(dbEvents);
+      
+      // let result = dbEvents.map((event) => 
+      //   (event.attendees).map(((guest) => guest.attendee.username)));
+      // console.log(result);
       // process.exit(0);
     })
     .catch(err => {
       console.log(err);
+      res.status(422).json(err);
       // process.exit(1);
     });
 
