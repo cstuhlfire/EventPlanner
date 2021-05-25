@@ -10,3 +10,7 @@
     color: white;
     font-weight: bold;
 }
+
+#navbarBasicExample {
+    background-image: linear-gradient(to right,  rgb(0, 219, 222), rgb(252, 0, 255)); 
+}

@@ -2,11 +2,51 @@
     background-image: url("../utils/images/balloons.jpg");
     color: white;
     font-weight: bold;
-    padding: 10%;
+    font-size: 45px;
     text-align: center;
     border-bottom: 5px solid blueviolet;
 }
+.p {
+    font-size: 20px;
+    font-style: italic;
+}
+svg text {
+ animation: color-change 2s infinite;
 
-.media-content {
-    padding: 20%;
+}
+
+.search {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-left: 5%;
+    border-radius: 0% !important;
+}
+
+.bt {
+    height: 40px;
+    margin-top: 3%;
+    border-radius: 6%;
+    background-color: blueviolet;
+    border:aqua;
+    color: white;
+
+}
+.i {
+    border-color: blueviolet !important;
+    margin-top: 3%;
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    align-items: center;
+}
+
+@keyframes color-change {
+    100% {
+      stroke-dasharray:  50%;
+      stroke-dashoffset:  10%;
+      fill: rgb(205, 219, 252);
+
+    }
+
 }
