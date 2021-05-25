@@ -10,45 +10,59 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
   useCreateIndex: true,
   useFindAndModify: false });
 
+
+  // Password creation with bcrypt
+  // // create a user a new user
+  console.log("new user");
+
   // create a user a new user
-let testUser = new db.Users({
-  username: "jmar777",
-  password: "Password"
-});
-
-// save user to database
-testUser.save()
-  .then (newUser => {
-    console.log(newUser);
-
+  const testUser = new User({
+    username: "acast888",
+    password: "Password888!"
   });
 
-// fetch user and test password verification
-// db.Users.findOne({ username: 'jmar777' }, function(err, user) {
-//   if (err) throw err;
 
-//   // test a matching password
-//   user.comparePassword('Password123', function(err, isMatch) {
-//       if (err) throw err;
-//       console.log('Password123:', isMatch); // -> Password123: true
-//   });
+  // save user to database
+  console.log("saving");
 
-//   // test a failing password
-//   user.comparePassword('123Password', function(err, isMatch) {
-//       if (err) throw err;
-//       console.log('123Password:', isMatch); // -> 123Password: false
-//   });
-// });
-
-  db.Users.findOne({username: "jmar777"})
-  .then(dbUsers => {
-    console.log(dbUsers);
-    process.exit(0);
-  })
-  .catch(err => {
+  testUser.save()
+  .then((data) => {
+    console.log(data);
+  }) 
+  .catch((err) => {
     console.log(err);
-    process.exit(1);
   });
+ 
+
+  console.log("saved");
+
+
+
+
+  // fetch user and test password verification
+  // User.findOne({ username: 'cfire777' })
+  //   .then ((user) => {
+
+  //   })
+  //   .catch ((err) => {
+  //     if (err) throw err;
+
+  //   })
+
+    // // test a matching password
+    // user.comparePassword("Password777!", function(err, isMatch) {
+    //     if (err) throw err;
+    //     console.log("Password777!:", isMatch); // -> Password123: true
+    // });
+
+    // // test a failing password
+    // user.comparePassword("Password777!", function(err, isMatch) {
+    //     if (err) throw err;
+    //     console.log("Password777!:", isMatch); // -> 123Password: false
+    // });
+
+
+
 
 // db.Events.find({}).populate("attendees.attendee")
 // .then(dbEvents => {
@@ -61,6 +75,8 @@ testUser.save()
 //   console.log(err);
 //   process.exit(1);
 // });
+
+
 
 // db.Lists.findOne({})
 // .then(lists => {
@@ -75,6 +91,9 @@ testUser.save()
 //   console.log(err);
 //   process.exit(1);
 // });
+
+
+
 
 // db.Events.findOne()
 //   .populate({
