@@ -44,7 +44,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
   User.findOne({ username: 'cfire777' })
     .then ((user) => {
       console.log(user);
-      user.comparePassword("Password77!", function(err, isMatch) {
+      user.comparePassword("Password777!", function(err, isMatch) {
         if (err) throw err;
         console.log("Password777!:", isMatch); 
         

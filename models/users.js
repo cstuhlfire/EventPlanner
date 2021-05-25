@@ -66,7 +66,6 @@ usersSchema.pre('save', function(next) {
   // password verification since user typed password will be in plain text
   // must do bcrypt.compareSync to verify
   usersSchema.methods.comparePassword = function(plaintext, callback) {
-    console.log("compare");
     return callback(null, bcrypt.compareSync(plaintext, this.password));
   };
 
