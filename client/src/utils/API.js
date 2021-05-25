@@ -22,10 +22,10 @@ export default {
   },
   checkUser: function(userData){
     return axios.post("/api/users/login", userData)
+  },
+  getEvents: function(){
+    return axios.get("/api/events");
   }
-  // getEvents: function(){
-  //   return axios.get("/api/events");
-  // },
   // getLists: function(){
   //   return axios.get("/api/lists/" + event_id);
   // },

@@ -34,5 +34,31 @@ module.exports = {
       .then(dbEventData => dbEventData.remove())
       .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
+  },
+  findAllEvents: function (req, res) {
+
+    db.Events.find({})
+    .populate({
+        path: "lists.items",
+        populate: "assignedTo"
+      })
+      .populate("attendees.attendee")
+      .populate("announcements.author")
+      .populate("comments.author")
+    .populate("attendees.attendee")
+    .then(dbEvents => {
+      let result = dbEvents.map((event) => 
+        (event.attendees).map(((guest) => guest.attendee.username)));
+      console.log(result);
+      // process.exit(0);
+    })
+    .catch(err => {
+      console.log(err);
+      // process.exit(1);
+    });
+
   }
+
+
+
 };
