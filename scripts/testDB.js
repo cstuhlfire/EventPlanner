@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const db = require("../models");
+const User = require("../models/users");
 require('dotenv').config();
 
 // Connect to mongoose
@@ -8,6 +9,59 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false });
+
+
+  // Password creation with bcrypt
+  // // create a user a new user
+  console.log("new user");
+
+  // create a user a new user
+  const testUser = new User({
+    username: "acast888",
+    password: "Password888!"
+  });
+
+
+  // save user to database
+  console.log("saving");
+
+  testUser.save()
+  .then((data) => {
+    console.log(data);
+  }) 
+  .catch((err) => {
+    console.log(err);
+  });
+ 
+
+  console.log("saved");
+
+
+
+
+  // fetch user and test password verification
+  // User.findOne({ username: 'cfire777' })
+  //   .then ((user) => {
+
+  //   })
+  //   .catch ((err) => {
+  //     if (err) throw err;
+
+  //   })
+
+    // // test a matching password
+    // user.comparePassword("Password777!", function(err, isMatch) {
+    //     if (err) throw err;
+    //     console.log("Password777!:", isMatch); // -> Password123: true
+    // });
+
+    // // test a failing password
+    // user.comparePassword("Password777!", function(err, isMatch) {
+    //     if (err) throw err;
+    //     console.log("Password777!:", isMatch); // -> 123Password: false
+    // });
+
+
 
 
 // db.Events.find({}).populate("attendees.attendee")
@@ -21,6 +75,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 //   console.log(err);
 //   process.exit(1);
 // });
+
+
 
 // db.Lists.findOne({})
 // .then(lists => {
@@ -36,27 +92,30 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 //   process.exit(1);
 // });
 
-db.Events.findOne()
-  .populate({
-    path: "lists.items",
-    populate: "assignedTo"
-  })
-  .populate("attendees.attendee")
-  .populate("announcements.author")
-  .populate("comments.author")
-  
- .then(dbEvents => {
 
-    console.log(dbEvents);
-    dbEvents.lists.forEach((list) => console.log(list.items));
-    dbEvents.attendees.forEach((attendee) => console.log(attendee));
-    dbEvents.announcements.forEach((announcement) => console.log(announcement));
-    dbEvents.comments.forEach((comment) => console.log(comment));
+
+
+// db.Events.findOne()
+//   .populate({
+//     path: "lists.items",
+//     populate: "assignedTo"
+//   })
+//   .populate("attendees.attendee")
+//   .populate("announcements.author")
+//   .populate("comments.author")
+  
+//  .then(dbEvents => {
+
+//     console.log(dbEvents);
+//     dbEvents.lists.forEach((list) => console.log(list.items));
+//     dbEvents.attendees.forEach((attendee) => console.log(attendee));
+//     dbEvents.announcements.forEach((announcement) => console.log(announcement));
+//     dbEvents.comments.forEach((comment) => console.log(comment));
 
    
-  process.exit(0);
-})
-.catch(err => {
-  console.log(err);
-  process.exit(1);
-});
+//   process.exit(0);
+// })
+// .catch(err => {
+//   console.log(err);
+//   process.exit(1);
+// });
