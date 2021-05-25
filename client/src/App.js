@@ -6,6 +6,7 @@ import Navbar from "./pages/Navbar.js";
 import "./App.css"
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import CreateEvent from "./pages/CreateEvent";
 
 function App() {
   return (
@@ -21,6 +22,10 @@ function App() {
           <Route exact path="/">
             <Navbar />
             <Home />
+          </Route>
+          <Route exact path="/CreateEvent">
+            <Navbar />
+           <CreateEvent />
           </Route>
           </Switch>
         </Router>

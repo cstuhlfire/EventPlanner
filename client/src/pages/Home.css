@@ -12,7 +12,6 @@
 }
 svg text {
  animation: color-change 2s infinite;
-
 }
 
 .search {
@@ -30,7 +29,6 @@ svg text {
     background-color: blueviolet;
     border:aqua;
     color: white;
-
 }
 .i {
     border-color: blueviolet !important;
@@ -48,5 +46,4 @@ svg text {
       fill: rgb(205, 219, 252);
 
     }
-
 }
