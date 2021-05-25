@@ -18,13 +18,20 @@ const usersSchema = new Schema({
           },
   email: { 
             type: String,
-            trim: true
-            // match: /.+\@.+\..+/,
-            // unique: true
+            trim: true,
+            match: /.+\@.+\..+/,
+            unique: true
           },
   phone: {
             type: String,
-            trim: true 
+            trim: true,
+            validate: {
+              validator: function(v) {
+                return /\d{10}/.test(v);
+              },
+              message: props => `${props.value} is not a valid phone number!`
+            },
+            required: [true, 'User phone number required']
           }
 },
 { timestamps: true }

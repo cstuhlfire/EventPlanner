@@ -38,24 +38,24 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 
 
-  console.log("find");
+  // console.log("find");
 
-  // fetch user and test password verification
-  User.findOne({ username: 'cfire777' })
-    .then ((user) => {
-      console.log(user);
-      user.comparePassword("Password777!", function(err, isMatch) {
-        if (err) throw err;
-        console.log("Password777!:", isMatch); 
+  // // fetch user and test password verification
+  // User.findOne({ username: 'cfire777' })
+  //   .then ((user) => {
+  //     console.log(user);
+  //     user.comparePassword("Password777!", function(err, isMatch) {
+  //       if (err) throw err;
+  //       console.log("Password777!:", isMatch); 
         
-      });
-    })
-    .then (() => {
-      console.log("later");
-    })
-    .catch ((err) => {
-      console.log(err);
-    })
+  //     });
+  //   })
+  //   .then (() => {
+  //     console.log("later");
+  //   })
+  //   .catch ((err) => {
+  //     console.log(err);
+  //   })
     
 
 
@@ -82,12 +82,10 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 
 
-// db.Lists.findOne({})
-// .then(lists => {
+// db.Events.find({})
+// .then(data => {
 
-//   // let test = lists.map((list) => list.items)
-//   let test = lists.items.map((itm) => itm);
-//   console.log(test);
+//   console.log(data);
 
 //   process.exit(0);
 // })
@@ -99,27 +97,27 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 
 
-// db.Events.findOne()
-//   .populate({
-//     path: "lists.items",
-//     populate: "assignedTo"
-//   })
-//   .populate("attendees.attendee")
-//   .populate("announcements.author")
-//   .populate("comments.author")
+db.Events.findOne()
+  .populate({
+    path: "lists.items",
+    populate: "assignedTo"
+  })
+  .populate("attendees.attendee")
+  .populate("announcements.author")
+  .populate("comments.author")
   
-//  .then(dbEvents => {
+ .then(dbEvents => {
 
-//     console.log(dbEvents);
-//     dbEvents.lists.forEach((list) => console.log(list.items));
-//     dbEvents.attendees.forEach((attendee) => console.log(attendee));
-//     dbEvents.announcements.forEach((announcement) => console.log(announcement));
-//     dbEvents.comments.forEach((comment) => console.log(comment));
+    console.log(dbEvents);
+    dbEvents.lists.forEach((list) => console.log(list.items));
+    dbEvents.attendees.forEach((attendee) => console.log(attendee));
+    dbEvents.announcements.forEach((announcement) => console.log(announcement));
+    dbEvents.comments.forEach((comment) => console.log(comment));
 
    
-//   process.exit(0);
-// })
-// .catch(err => {
-//   console.log(err);
-//   process.exit(1);
-// });
+  process.exit(0);
+})
+.catch(err => {
+  console.log(err);
+  process.exit(1);
+});
