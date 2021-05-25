@@ -21,7 +21,7 @@ export default {
     return axios.post("/api/users", userData);
   },
   checkUser: function(userData){
-    return axios.get("/api/users", userData)
+    return axios.post("/api/users/login", userData)
   }
   // getEvents: function(){
   //   return axios.get("/api/events");

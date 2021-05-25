@@ -41,9 +41,9 @@ const usersController = require("../../controllers/usersController");
 ////////////////////////////////////////////////////// 
 
 
-// Matches with "/api/users"
+// Matches with "/api/users/"
 router.route("/")
-  .get(usersController.login)
+  // .get(usersController.login)
   .post(usersController.create);
 
 
@@ -51,8 +51,8 @@ router.route("/")
   // Alternative with async/await function:
   // .post(usersController.alogin) 
 
-// router.route("/login")
-//   .post(usersController.create);
+router.route("/login")
+  .post(usersController.login);
 
 // Matches with "/api/users/logout"
 router.route("/logout")

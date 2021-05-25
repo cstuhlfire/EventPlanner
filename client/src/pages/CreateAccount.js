@@ -27,7 +27,7 @@ function CreateAccount() {
 
             username: userinput,
             password: passwordinput,
-            eamil: emailinput,
+            email: emailinput,
             phone: phoneinput
 
         })
