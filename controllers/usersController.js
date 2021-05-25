@@ -4,21 +4,26 @@ const db = require("../models");
 // Defining methods for the usersController
 module.exports = {
   findAll: function(req, res) {
-    db.User
+    db.Users
       .find(req.query)
       .sort({ _id: -1 })
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   },
   findById: function(req, res) {
-    db.User
+    db.Users
       .findById(req.params.id)
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.User
-      .create(req.body)
+
+    console.log(req.body);
+    const newUser = new db.Users (req.body);
+
+    
+    newUser
+      .save()
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   },
@@ -76,7 +81,7 @@ module.exports = {
 
   /// .findOne ///
   // login: function(req, res) { 
-  //   db.User
+  //   db.Users
   //     .findOne({ where: { email: req.body.email } }, req.body)
   //     .then(dbUserData => {
   //       if (!dbUserData) {
@@ -117,13 +122,13 @@ module.exports = {
 
 
   update: function(req, res) {
-    db.User
+    db.Users
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbUserData => res.json(dbUserData))
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {
-    db.User
+    db.Users
       .findById({ _id: req.params.id })
       .then(dbUserData => dbUserData.remove())
       .then(dbUserData => res.json(dbUserData))

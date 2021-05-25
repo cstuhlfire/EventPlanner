@@ -50,8 +50,9 @@ router.route("/")
   // Matches with "/api/users/login"
   // Alternative with async/await function:
   // .post(usersController.alogin) 
+
 // router.route("/login")
-  // .post(usersController.login);
+//   .post(usersController.create);
 
 // Matches with "/api/users/logout"
 router.route("/logout")
