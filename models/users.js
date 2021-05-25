@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
+const { collection } = require("./events");
 SALT_WORK_FACTOR = 10;
 
 const usersSchema = new Schema({
@@ -32,30 +33,44 @@ const usersSchema = new Schema({
 // hash the password before saving
 usersSchema.pre('save', function(next) {
   let user = this;
+
   // only hash the password if it has been modified (or is new)
-  if (!user.isModified('password')) return next();
-  
+  if (!user.isModified('password')) {
+    return next();
+  }
+
   // generate a salt
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
-      if (err) return next(err);
-      // hash the password along with our new salt
-      bcrypt.hash(user.password, salt, function(err, hash) {
-          if (err) return next(err);
-  
+    
+    if (err) {
+      console.log("error: %s", err);
+      return next(err);
+    }
+
+    // hash the password along with our new salt
+    bcrypt.hash(user.password, salt)
+        .then((hash) =>  {
+
           // override the cleartext password with the hashed one
           user.password = hash;
           next();
-      });
+
+      })
+      .catch(err => {
+        console.log("next error: %s", err);
+        return next(err);
+      })
     });
   });
 
-  // password verification
-  usersSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err) return cb(err);
-        cb(null, isMatch);
-    });
-};
+  // password verification since user typed password will be in plain text
+  // must do bcrypt.compare to verify
+  // usersSchema.methods.comparePassword = function(candidatePassword, cb) {
+  //   bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+  //       if (err) return cb(err);
+  //       cb(null, isMatch);
+  //   });
+  // };
 
 const Users = mongoose.model("Users", usersSchema);
 
