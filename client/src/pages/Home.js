@@ -25,12 +25,16 @@ function Home() {
             </div>
 
          {/* map event component here */}
+<div className="column">
 
         <Events 
         // title={api.title}
         // image={api.image} 
         // description={api.description} 
         />
+
+</div>
+       
         </div>
     )
 }

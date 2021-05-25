@@ -23,13 +23,13 @@
     padding-bottom: 15px;
     font-family: 'Josefin Sans';
     color: purple;
-    font-weight: bold;
-   
+    font-weight: bold;  
 }
 
 .email {
     padding: 1%;
 }
+
 .cont {
     z-index: 201;
     padding-top: 5%;

@@ -6,7 +6,7 @@ function Events() {
     return (
     <div>
         <div class="cc columns features">
-        <div class="column is-half">
+        <div class="column is-one-fourth">
           <div class="card card is-shady">
             <div class="card-image">
               <figure class="image is-4by3">

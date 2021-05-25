@@ -3,10 +3,11 @@ import CreateAccount from "./pages/CreateAccount"
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Navbar from "./pages/Navbar.js";
+import CreateEvent from "./pages/CreateEvent";
+import ViewEvent from "./pages/ViewEvent";
 import "./App.css"
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import CreateEvent from "./pages/CreateEvent";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
           <Route exact path="/CreateEvent">
             <Navbar />
            <CreateEvent />
+          </Route>
+          <Route exact path="/ViewEvent">
+            <Navbar />
+           <ViewEvent />
           </Route>
           </Switch>
         </Router>
