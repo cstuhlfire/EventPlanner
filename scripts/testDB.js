@@ -119,18 +119,18 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
   //     ]}
 
 
-   // Create new announcements
-    // db.Events.findByIdAndUpdate({_id: eventId},
-    //   {$push: {announcements: body.announcements}},
-    //   {new: true})
-    //   .then((data) => {
-    //     console.log(data);
-    //     process.exit(0);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     process.exit(1);
-    //   });
+  //  // Create new announcements
+  //   db.Events.findByIdAndUpdate({_id: eventId},
+  //     {$push: {announcements: body.announcements}},
+  //     {new: true})
+  //     .then((data) => {
+  //       console.log(data);
+  //       process.exit(0);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       process.exit(1);
+  //     });
 
 
   // Comments test data
@@ -143,17 +143,17 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 
   //  // Create new  comments
-  //   db.Events.findByIdAndUpdate({_id: eventId},
-  //     {$push: {comments: body.comments}},
-  //     {new: true})
-  //     .then((data) => {
-  //       console.log(data);
-  //       process.exit(0);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       process.exit(1);
-  //     });
+    // db.Events.findByIdAndUpdate({_id: eventId},
+    //   {$push: {comments: body.comments}},
+    //   {new: true})
+    //   .then((data) => {
+    //     console.log(data);
+    //     process.exit(0);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     process.exit(1);
+    //   });
 
 
 
