@@ -3,26 +3,26 @@ const db = require("../models");
 // Calling Schema Event for now
 // Defining methods for the eventsController
 module.exports = {
-  findAll: function(req, res) {
-    db.Events
-      .find(req.query)
-      .sort({ date: -1 })
-      .then(dbEventData => res.json(dbEventData))
-      .catch(err => res.status(422).json(err));
-  },
-  create: function(req, res) {
+  // findAll: function(req, res) {
+  //   db.Events
+  //     .find(req.query)
+  //     .sort({ date: -1 })
+  //     .then(dbEventData => res.json(dbEventData))
+  //     .catch(err => res.status(422).json(err));
+  // },
+  createEvent: function(req, res) {
     db.Events
       .create(req.body)
       .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
-  update: function(req, res) {
-    db.Events
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbEventData => res.json(dbEventData))
-      .catch(err => res.status(422).json(err));
-  },
-  remove: function(req, res) {
+  // update: function(req, res) {
+  //   db.Events
+  //     .findOneAndUpdate({ _id: req.params.id }, req.body)
+  //     .then(dbEventData => res.json(dbEventData))
+  //     .catch(err => res.status(422).json(err));
+  // },
+  deleteEvent: function(req, res) {
     db.Events
       .findById({ _id: req.params.id })
       .then(dbEventData => dbEventData.remove())
@@ -60,7 +60,7 @@ module.exports = {
       res.status(422).json(err);
     });
   },
-  findById: function(req, res) {
+  findEventById: function(req, res) {
     console.log("entered eventsController/findById")
     db.Events.findOne({id: req.params.id})
     .populate({
