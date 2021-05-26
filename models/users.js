@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
-//const { collection } = require("./events");
 SALT_WORK_FACTOR = 10;
 
 const usersSchema = new Schema({
@@ -19,19 +18,12 @@ const usersSchema = new Schema({
   email: { 
             type: String,
             trim: true,
-            match: /.+\@.+\..+/,
-            unique: true
+            unique: false
           },
   phone: {
             type: String,
             trim: true,
-            validate: {
-              validator: function(v) {
-                return /\d{10}/.test(v);
-              },
-              message: props => `${props.value} is not a valid phone number!`
-            },
-            required: [true, 'User phone number required']
+            required: false
           }
 },
 { timestamps: true }

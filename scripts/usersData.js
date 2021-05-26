@@ -29,7 +29,7 @@ const usersSeed = [
       username: "acastil",
       password: "acastil",
       email: "acastil@email.com",
-      phone: "972-212-7779"
+      phone: "972-212-777"
     },
   ];
 

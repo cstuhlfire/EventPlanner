@@ -3,12 +3,34 @@ const db = require("../models");
 const User = require("../models/users");
 require('dotenv').config();
 
+// const Regex = require("regex");
+const regexEmail1 = /.+\@.+\..+/;
+// const regexEmail2 = new Regex(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
+// const regexEmail3 = new Regex(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+
 // Connect to mongoose
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", { 
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
   useFindAndModify: false });
+
+
+  init();
+  
+  function validateEmail(email) {
+    const re = regexEmail1;
+    return re.test(String(email).toLowerCase());
+}
+
+  function init () {
+    let valid = validateEmail("cstuhlfire@gmailcom");
+    if (valid) {
+      console.log("Yay! Valid email");
+    } else {
+      console.log("Blerg. Invalid email");
+    }
+  }
 
 
   // Password creation with bcrypt
@@ -97,27 +119,29 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 
 
-db.Events.findOne()
-  .populate({
-    path: "lists.items",
-    populate: "assignedTo"
-  })
-  .populate("attendees.attendee")
-  .populate("announcements.author")
-  .populate("comments.author")
+// db.Events.findOne()
+//   .populate({
+//     path: "lists.items",
+//     populate: "assignedTo"
+//   })
+//   .populate("attendees.attendee")
+//   .populate("announcements.author")
+//   .populate("comments.author")
   
- .then(dbEvents => {
+//  .then(dbEvents => {
 
-    console.log(dbEvents);
-    dbEvents.lists.forEach((list) => console.log(list.items));
-    dbEvents.attendees.forEach((attendee) => console.log(attendee));
-    dbEvents.announcements.forEach((announcement) => console.log(announcement));
-    dbEvents.comments.forEach((comment) => console.log(comment));
+//     console.log(dbEvents);
+//     dbEvents.lists.forEach((list) => console.log(list.items));
+//     dbEvents.attendees.forEach((attendee) => console.log(attendee));
+//     dbEvents.announcements.forEach((announcement) => console.log(announcement));
+//     dbEvents.comments.forEach((comment) => console.log(comment));
 
    
-  process.exit(0);
-})
-.catch(err => {
-  console.log(err);
-  process.exit(1);
-});
+//   process.exit(0);
+// })
+// .catch(err => {
+//   console.log(err);
+//   process.exit(1);
+// });
+
+process.exit(0);
