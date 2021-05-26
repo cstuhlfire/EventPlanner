@@ -1,32 +1,13 @@
 import React from 'react'
 import "./ViewEvents.css"
 
-function ViewEvent() {
 
-
-    
-    
+function ViewEvent() {   
     return (
-        <div>
-           <div className="tile is-ancestor">
-               
+        <div className="container">
+           <div className="tile is-ancestor"> 
             <div className="desc tile is-vertical is-8">
-            <div className="tile is-parent">
-                <article className="tile is-child notification is-danger">
-                    <div className="column">
-                        <p className="title">Description:</p>
-                        <p className="subtitle"> data.description </p>
-                        <p className="subtitle"> data.description </p>
-                        <p className="subtitle"> data.description </p>
-                    </div>
-                  
-                
-    <div className="content">
-                    
-                    </div>
-                </article>
-                </div>
-                <div className="tile">
+                <div className="tile is-12">
                 <div className="tile is-parent is-vertical">
                     <article className="announcementstile is-child notification is-primary">
                     <p className="title">Anouncements </p>
@@ -34,23 +15,26 @@ function ViewEvent() {
                         <ul>
                             <li>
                                 <a href="#">
-                                <h2>Title #1</h2>
-                                <p>Text Content #1</p>
+                                <h2>Title</h2>
+                                <p>Text Content</p>
                                 </a>
                             </li>
                         </ul>
 
-                    <p className="subtitle">data.attendees</p>
+                    <p className="subtitle">Party Guests: attendees.length</p>
                     </article>
-                    <article className="tile is-child notification is-warning">
-                    <p className="title">Party Goers:</p>
-                    <p className="subtitle">attendees.length</p>
+                 
+                    <article className="tile is-child notification ">
+                    <p className="title">Event Information</p>
+                    <p className="subtitle">event.description</p>
+                    <p className="subtitle">event.date</p>
+                    <p className="subtitle">event.location</p>
                     </article>
                 </div>
-                <div className="todo tile is-parent">
+                <div className="todo tile  is-parent">
                     <article className="todo tile is-child notification is-info">
-                    <p className="title">To Do: </p>
-                    <p className="subtitle"></p>
+                        <h1>Title</h1>
+                        
                     </article>
                     {/* start comments */}
                 </div>

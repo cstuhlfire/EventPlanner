@@ -124,9 +124,28 @@ body {
     transition: transform .15s linear;
   }
 
+
+  .container {
+      margin-left: 5%;
+
+  }
   .announcementstitle {
       background-image: url("../utils/images/corkboard.jpg") !important;
       display: block; 
       max-width: 100%;
       height: auto;
+  }
+
+  .comments {
+      margin-bottom: 40%;
+  }
+
+  body {
+    padding: 50px;
+    background-color: #66CCFF;
+    font-family: sans-serif;
+  }
+  #container {
+    display: flex;
+    justify-content: center;
   }
