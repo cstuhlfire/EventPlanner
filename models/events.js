@@ -62,7 +62,6 @@ const eventsSchema = new Schema({
         ]
     }
   ],
-  // announcements: [announcementsSchema],
   announcements: [
     {
       author: {
