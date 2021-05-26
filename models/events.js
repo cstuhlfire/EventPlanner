@@ -16,7 +16,12 @@ const eventsSchema = new Schema({
       trim: true
     },
   eventDateTime: { 
-      type: Date 
+      type: Date,
+      default: Date.now
+    },
+  eventImage: { 
+      type: String,
+      default: "/images/balloons.jpg"
     },
   attendees: [
     {

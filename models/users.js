@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
-//const { collection } = require("./events");
 SALT_WORK_FACTOR = 10;
 
 const usersSchema = new Schema({
@@ -18,13 +17,13 @@ const usersSchema = new Schema({
           },
   email: { 
             type: String,
-            trim: true
-            // match: /.+\@.+\..+/,
-            // unique: true
+            trim: true,
+            unique: false
           },
   phone: {
             type: String,
-            trim: true 
+            trim: true,
+            required: false
           }
 },
 { timestamps: true }
@@ -66,7 +65,6 @@ usersSchema.pre('save', function(next) {
   // password verification since user typed password will be in plain text
   // must do bcrypt.compareSync to verify
   usersSchema.methods.comparePassword = function(plaintext, callback) {
-    console.log("compare");
     return callback(null, bcrypt.compareSync(plaintext, this.password));
   };
 
