@@ -119,7 +119,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
   //     ]}
 
 
-   // Create new  
+   // Create new announcements
     // db.Events.findByIdAndUpdate({_id: eventId},
     //   {$push: {announcements: body.announcements}},
     //   {new: true})
@@ -133,27 +133,27 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
     //   });
 
 
-  // Announcements test data
-  const eventId = "60add8ed63435831b8ef7042";
-  const body = {
-      comments: [
-        {author:  "60ad3e5da8036d04845740a1", text: "What does Jeremy want for his bday this year?"},
-        {author:  "60ad3e5da8036d04845740a2", text: "Legos, Legos, Legos, and tigers."},
-      ]}
+  // Comments test data
+  // const eventId = "60add8ed63435831b8ef7042";
+  // const body = {
+  //     comments: [
+  //       {author:  "60ad3e5da8036d04845740a1", text: "What does Jeremy want for his bday this year?"},
+  //       {author:  "60ad3e5da8036d04845740a2", text: "Legos, Legos, Legos, and tigers."},
+  //     ]}
 
 
-   // Create new  
-    db.Events.findByIdAndUpdate({_id: eventId},
-      {$push: {comments: body.comments}},
-      {new: true})
-      .then((data) => {
-        console.log(data);
-        process.exit(0);
-      })
-      .catch((err) => {
-        console.log(err);
-        process.exit(1);
-      });
+  //  // Create new  comments
+  //   db.Events.findByIdAndUpdate({_id: eventId},
+  //     {$push: {comments: body.comments}},
+  //     {new: true})
+  //     .then((data) => {
+  //       console.log(data);
+  //       process.exit(0);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       process.exit(1);
+  //     });
 
 
 

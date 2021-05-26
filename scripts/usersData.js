@@ -20,16 +20,22 @@ const usersSeed = [
       phone: "972-212-7777"
     },
     {
-      username: "cmiley",
-      password: "cmiley777",
-      email: "cmileyo@email.com",
+      username: "jsmith",
+      password: "jsmith777",
+      email: "jsmith@email.com",
       phone: "972-212-7778"
     },
     {
-      username: "acastil",
-      password: "acastil",
-      email: "acastil@email.com",
-      phone: "972-212-777"
+      username: "bcranston",
+      password: "bcranston",
+      email: "bcranson@email.com",
+      phone: "972-212-7776"
+    },
+    {
+      username: "pgriffin",
+      password: "pgriffin",
+      email: "pgriffin@email.com",
+      phone: "972-212-7728"
     },
   ];
 
