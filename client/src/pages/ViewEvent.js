@@ -1,8 +1,9 @@
 import React from 'react'
 import "./ViewEvents.css"
-
+import ToDoList from "../components/ToDoList";
 
 function ViewEvent() {   
+ 
     return (
         <div className="container">
            <div className="tile is-ancestor"> 
@@ -15,8 +16,8 @@ function ViewEvent() {
                         <ul>
                             <li>
                                 <a href="#">
-                                <h2>Title</h2>
-                                <p>Text Content</p>
+                                    <ToDoList />
+                                
                                 </a>
                             </li>
                         </ul>
@@ -33,8 +34,8 @@ function ViewEvent() {
                 </div>
                 <div className="todo tile  is-parent">
                     <article className="todo tile is-child notification is-info">
-                        <h1>Title</h1>
-                        
+                        <h1>To Do</h1>
+                        <ToDoList />
                     </article>
                     {/* start comments */}
                 </div>
