@@ -105,11 +105,64 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 
 
-//////////////////// Testing delete Event
-let reqparamsid = "60ad3abd2059fd0abbe71dc6"
+// //////////////////// Testing delete Event --------- Success
+// let reqparamsid = "60ad3abd2059fd0abbe71dc6"
+
+// db.Events
+//       .findById({ _id: reqparamsid })
+//       .then(dbEventData => dbEventData.remove())
+//       .then(dbEventData => console.log(dbEventData))
+//       .catch(err => console.log(err));
+
+
+////////// Testing add list to event ID passed in ------ Success
+
+// let reqparamsid = "60ad3bd829e84e0afd34226f"
+// let reqbody = {
+//     listName: "Needs:",
+//   }
+
+// db.Events
+//       .findById({ _id: reqparamsid })
+//       .then(dbEventData => dbEventData.update({lists: { listName: reqbody.listName, items: []}}))
+//       .then(dbEventData => console.log(dbEventData))
+//       .catch(err => console.log(err));
+
+
+
+///////////// Testing add list items to event ID and listname passed in ---------- Success
+// let reqparamsid = "60ad3bd829e84e0afd34226f"
+// let reqbody = {
+//     listName: "Needs:",
+//     items: [  {itemName: "Drinks", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: true},
+//               {itemName: "Projector", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: true}, 
+//               {itemName: "Snacks", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: true}, 
+//               {itemName: "Cupware", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: true}, 
+//               {itemName: "Plateware", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: true}]
+//   }
+
+// db.Events
+//       .findById({ _id: reqparamsid })
+//       .then(dbEventData => dbEventData.update({lists: { listName: reqbody.listName, items: reqbody.items}}))
+//       .then(dbEventData => console.log(dbEventData))
+//       .catch(err => console.log(err));
+
+
+/////////// Testing add single list items to existing list with single item and listname passed in ------ Success
+let reqparamsid = "60ad393469e56e0a903434bc"
+let reqbody = {
+    listName: "Food",
+    items: [  {itemName: "Pizza", assignedTo: "60ad0b20bbba44045a0a0eb0", status: "needed", assigned: true},
+              {itemName: "Cookies", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: true}]
+  }
 
 db.Events
-      .findById({ _id: reqparamsid })
-      .then(dbEventData => dbEventData.remove())
+      .updateOne({ _id: reqparamsid }, {
+        $push: { "lists.$[list].items": reqbody.items }
+      }, {
+        arrayFilters: [{
+          "list.listName": reqbody.listName,
+        }]
+      })
       .then(dbEventData => console.log(dbEventData))
       .catch(err => console.log(err));

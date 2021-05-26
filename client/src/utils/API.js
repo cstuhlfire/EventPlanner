@@ -26,6 +26,9 @@ export default {
   createEvent: function(eventData) {
     return axios.post("/api/events", eventData)
   },
+  createList: function(listData) {
+    return axios.post("api/events", listData)
+  },
   getEvents: function(){
     return axios.get("/api/events");
   },
