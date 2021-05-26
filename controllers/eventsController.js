@@ -10,12 +10,6 @@ module.exports = {
       .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
-  findById: function(req, res) {
-    db.Events
-      .findById(req.params.id)
-      .then(dbEventData => res.json(dbEventData))
-      .catch(err => res.status(422).json(err));
-  },
   create: function(req, res) {
     db.Events
       .create(req.body)
@@ -36,28 +30,121 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   findAllEvents: function (req, res) {
-
+    console.log("entered eventsController/findAllEvents")
     db.Events.find({})
     .populate({
-        path: "lists.items",
-        populate: "assignedTo"
-      })
-      .populate("attendees.attendee")
-      .populate("announcements.author")
-      .populate("comments.author")
+      path: "lists.items",
+      populate: "assignedTo"
+    })
+    .populate("attendees.attendee")
+    .populate("announcements.author")
+    .populate("comments.author")
     .populate("attendees.attendee")
     .then(dbEvents => {
-      let result = dbEvents.map((event) => 
-        (event.attendees).map(((guest) => guest.attendee.username)));
-      console.log(result);
-      // process.exit(0);
+
+      console.log(dbEvents);
+      dbEvents.forEach(dbEvent => {
+         
+        console.log("entire event instance: \n-----------------\n" + dbEvent);
+        dbEvent.lists.forEach((list) => console.log("Lists for event instance: \n-----------------\n" +list.items));
+        dbEvent.attendees.forEach((attendee) => console.log("Attendee (each) for event instance: \n-----------------\n" +attendee));
+        dbEvent.announcements.forEach((announcement) => console.log("Announcement (each) for event instance: \n-----------------\n" +announcement));
+        dbEvent.comments.forEach((comment) => console.log("Comment (each) for event instance: \n-----------------\n" +comment));
+       
+       }
+      )
+      res.json(dbEvents);
     })
     .catch(err => {
       console.log(err);
-      // process.exit(1);
+      res.status(422).json(err);
+    });
+  },
+  findById: function(req, res) {
+    console.log("entered eventsController/findById")
+    db.Events.findOne({id: req.params.id})
+    .populate({
+      path: "lists.items",
+      populate: "assignedTo"
+    })
+    .populate("attendees.attendee")
+    .populate("announcements.author")
+    .populate("comments.author")
+    
+    .then(dbEvent => {
+
+      console.log(dbEvent);
+      console.log("entire event instance: \n-----------------\n" + dbEvent);
+      dbEvent.lists.forEach((list) => console.log("Lists for event instance: \n-----------------\n" +list.items));
+      dbEvent.attendees.forEach((attendee) => console.log("Attendee (each) for event instance: \n-----------------\n" +attendee));
+      dbEvent.announcements.forEach((announcement) => console.log("Announcement (each) for event instance: \n-----------------\n" +announcement));
+      dbEvent.comments.forEach((comment) => console.log("Comment (each) for event instance: \n-----------------\n" +comment));
+
+      res.json(dbEventData)
+
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(422).json(err);
     });
 
-  }
+  },
+  removeList: function(req, res) {
+    db.Events
+      // .findById({ _id: req.params.id })
+    .findOne({id: req.params.id})
+    .populate({
+      path: "lists.items",
+      populate: "assignedTo"
+    })
+    .populate("attendees.attendee")
+    .populate("announcements.author")
+    .populate("comments.author")
+    
+    .then(dbEvent => dbEvent.lists.forEach(list => {
+      list.remove({listName: req.params.listName})})
+    .then(dbEvent => res.json(dbEvent)))
+    .catch(err => res.status(422).json(err));
+
+  },
+  removeAttendee: function(req, res) {
+    db.Events
+      // .findById({ _id: req.params.id })
+    .findOne({id: req.params.id})
+    .populate({
+      path: "lists.items",
+      populate: "assignedTo"
+    })
+    .populate("attendees.attendee")
+    .populate("announcements.author")
+    .populate("comments.author")
+    
+    .then(dbEvent => dbEvent.attendees.forEach(attendee => {
+      attendee.remove({username: req.params.username})
+    }))
+    .then(dbEvent => res.json(dbEvent))
+    .catch(err => res.status(422).json(err));
+
+  },
+  deleteAnnouncement: function(req, res) {
+    db.Events
+      // .findById({ _id: req.params.id })
+    .findOne({id: req.params.id})
+    .populate({
+      path: "lists.items",
+      populate: "assignedTo"
+    })
+    .populate("attendees.attendee")
+    .populate("announcements.author")
+    .populate("comments.author")
+    
+    .then(dbEvent => dbEvent.announcements.forEach(announcement => {
+      announcement.remove({_id: req.params.announcementid})
+    }))
+    .then(dbEvent => res.json(dbEvent))
+    .catch(err => res.status(422).json(err));
+
+  },
 
 
 

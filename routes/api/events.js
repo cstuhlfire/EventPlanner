@@ -13,4 +13,23 @@ router
   .put(eventsController.update)
   .delete(eventsController.remove);
 
+// Matches with "/api/events/:id/list/:listName"
+router.route(":id/list/:listName")
+  .get(eventsController.findList)
+  .put(eventsController.updateList)
+  .delete(eventsController.removeList);
+
+// Matches with "/api/events/:id/attendee/:username"
+router.route(":id/attendee/:username")
+  .get(eventsController.findList)
+  .put(eventsController.updateList)
+  .delete(eventsController.removeAttendee);
+
+  // Matches with "/api/events/:id/announcement/:announcementid"
+router.route(":id/announcement/:annnouncementid")
+  .get(eventsController.findList)
+  .put(eventsController.updateList)
+  .delete(eventsController.deleteAnnouncement);
+
+
 module.exports = router;
