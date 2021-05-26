@@ -2,7 +2,7 @@ import React from 'react'
 import "./Events.css"
 import AddIcon from '@material-ui/icons/Add';
 
-function Events() {
+function Events(props) {
     return (
     <div>
         <div class="cc columns features">
@@ -20,10 +20,10 @@ function Events() {
             </div>
             <div class="card-content">
               <div class="content">
-                <h4> props.title</h4>
-                <p> props.date</p>
-                <p> props.time</p>
-                <p> props.Loation</p>
+                <h4>{props.title}</h4>
+                <p>{props.date}</p>
+                <p>{props.time}</p>
+                <p>{props.location}</p>
                 <span class="button is-link modal-button" data-target="modal-image2">View Event</span>
               </div>
             </div>

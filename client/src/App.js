@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
   return (
       <>
+        <Navbar />
         <Router>
           <Switch>
           <Route exact path="/login">
@@ -21,15 +22,12 @@ function App() {
             <CreateAccount />
           </Route>
           <Route exact path="/">
-            <Navbar />
             <Home />
           </Route>
           <Route exact path="/CreateEvent">
-            <Navbar />
            <CreateEvent />
           </Route>
-          <Route exact path="/ViewEvent">
-            <Navbar />
+          <Route path="/event/:id" component={ViewEvent}>
            <ViewEvent />
           </Route>
           </Switch>
