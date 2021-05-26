@@ -1,19 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const announcementsSchema = new Schema({
-    author: {
-      type: Schema.Types.ObjectId,
-      ref: "Users"
-    },
-    text: {
-      type: String,
-      trim: true        
-    }
-},
-    { _id : true }
-);
-
 const eventsSchema = new Schema({
   eventName: {
       type: String, 
@@ -76,7 +63,7 @@ const eventsSchema = new Schema({
     }
   ],
   // announcements: [announcementsSchema],
-  announcements: [new Schema (
+  announcements: [
     {
       author: {
         type: Schema.Types.ObjectId,
@@ -86,7 +73,7 @@ const eventsSchema = new Schema({
         type: String,
         trim: true        
       }
-    })
+    }
   ],
   comments: [
     {
