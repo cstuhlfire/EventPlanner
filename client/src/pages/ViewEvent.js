@@ -77,6 +77,8 @@ function ViewEvent() {
                     <div className="todo tile  is-parent">
                         <article className="todo tile is-child notification is-info">
                             <h1>To Do</h1>
+                          <input placeholder="to do ..."></input>
+                          <button>submit</button>
                             <Lists data={lists} />
                         </article>
                         {/* start comments */}
