@@ -6,8 +6,6 @@ import API from "../utils/API";
 
 
 function Home() {
-
-
   useEffect(() => {
     loadEvents()
   }, [])
@@ -38,7 +36,6 @@ function Home() {
             </button>
             </div>
 
-  return (
       <div>
           <div className="testimonial">
           <svg>
@@ -68,7 +65,7 @@ function Home() {
             )}
         </div>
       </div>
-  )
-}
+    </div>
+    )}
 
 export default Home
