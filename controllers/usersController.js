@@ -22,7 +22,15 @@ module.exports = {
     const newUser = new db.Users (req.body);
     newUser
       .save()
-      .then(dbUserData => res.json(dbUserData))
+      .then(dbUserData => {
+        req.session.save(() => {
+          req.session.user_id = dbUserData._id;
+          req.session.username = dbUserData.username;
+          req.session.logged_in = true;
+
+        res.json(dbUserData);
+        })
+      })
       .catch(err => res.status(422).json(err));
   },
 
@@ -41,6 +49,7 @@ module.exports = {
   //     res.status(400).json(err);
   //   }
   // });
+
   login: function(req, res) {
     db.Users.findOne({ username: req.body.username })
       .then ((user) => {
@@ -63,15 +72,14 @@ module.exports = {
             return;
           } else {
             console.log("Success!");
-            console.log(user);
-            // req.session.save(() => {
-            //   req.session.user_id = userData.id;
-            //   req.session.use_name = userData.username;
-            //   req.session.logged_in = true;
-        
-            //   res.json({ user: userData, message: 'You are now logged in!' });
-            // });;
 
+            req.session.save(() => {
+              req.session.user_id = user._id;
+              req.session.username = user.username;
+              req.session.logged_in = true;
+            })
+
+            res.json({ user: user.username, message: 'You are now logged in!' });
           }
         });
         
