@@ -38,11 +38,11 @@ function CreateAccount() {
 
 
     return (
-        <div id="column">    
-        <div className="column">
-            <div className="cont columns">
-            <div className="column ">        
+<div id="column">    
+    <div className="column"> 
+          <div className="column ">        
                  {/* Form Starts Here */}
+    <div className="cont column">
             <div className="column">
                 <div>
                     <h3 className="head">Create Account</h3>
@@ -88,13 +88,13 @@ function CreateAccount() {
                     </p>
                 <div>
                     <p id="createLink">Already have an account? Login <a href="/login">here</a>!</p>
-                </div>
-                </div>
+        </div>
+         </div>
                 </div>
             </div>  
         </div>
-    </div>
-</div>
+        </div>
+        </div>
         
     )
 }

@@ -10,7 +10,7 @@
         "client": "cd client && npm run start",
         "usersSeed": "node scripts/usersSeed.js",
         "eventsSeed": "node scripts/eventsSeed.js",
-        "listsSeed": "node scripts/listsSeed.js",
+        "eventArraysSeed": "node scripts/eventArraysSeed.js",
         "testDB": "node scripts/testDB.js",
         "install": "cd client && npm install",
         "build": "cd client && npm run build",

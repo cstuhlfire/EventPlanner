@@ -6,8 +6,6 @@ import API from "../utils/API";
 
 
 function Home() {
-
-
   useEffect(() => {
     loadEvents()
   }, [])
@@ -38,15 +36,21 @@ function Home() {
             </button>
             </div>
 
-         {/* map event component here */}
-
-        <Events 
-        // title={api.title}
-        // image={api.image} 
-        // description={api.description} 
-        />
+      <div>
+         
+        {/* map event component here */}
+        <div className="column">
+            {/* { events.length > 0 && events.map(event => */}
+                <Events 
+                // title={title}
+                // date={date}
+                // time={time}
+                // location={location}
+                />
+            {/* )} */}
         </div>
-    )
-}
+      </div>
+    </div>
+    )}
 
 export default Home

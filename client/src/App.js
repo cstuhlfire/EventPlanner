@@ -3,14 +3,16 @@ import CreateAccount from "./pages/CreateAccount"
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Navbar from "./pages/Navbar.js";
+import CreateEvent from "./pages/CreateEvent";
+import ViewEvent from "./pages/ViewEvent";
 import "./App.css"
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import CreateEvent from "./pages/CreateEvent";
 
 function App() {
   return (
       <>
+        <Navbar />
         <Router>
           <Switch>
           <Route exact path="/login">
@@ -20,12 +22,13 @@ function App() {
             <CreateAccount />
           </Route>
           <Route exact path="/">
-            <Navbar />
             <Home />
           </Route>
           <Route exact path="/CreateEvent">
-            <Navbar />
            <CreateEvent />
+          </Route>
+          <Route path="/event/:id" component={ViewEvent}>
+           <ViewEvent />
           </Route>
           </Switch>
         </Router>
