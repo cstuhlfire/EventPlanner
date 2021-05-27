@@ -3,6 +3,7 @@ import "./Home.css";
 import Events from "../components/Events";
 import SearchIcon from '@material-ui/icons/Search';
 import API from "../utils/API";
+import utils from "../utils/utils";
 
 
 function Home() {
@@ -46,7 +47,7 @@ function Home() {
         {/* <div className="column> */}
         <div className="columns is-desktop">
             {/* { events.length > 0 && events.map(event => */}
-          {events.map((event)=> <Events title={event.eventName} date={event.eventDateTime} time={event.eventDateTime} location={event.location} image={event.eventImage} _id={event._id}></Events>)}
+          {events.map((event)=> <Events title={event.eventName} date={utils.formatDate(event.eventDateTime)} time={utils.formatTime(event.eventDateTime)} location={event.location} image={event.eventImage} _id={event._id}></Events>)}
         </div>
       </div>
     </div>
