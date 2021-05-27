@@ -39,13 +39,10 @@ let user6 = "";
 let userIds = [];
 let eventIds = [];
 
-init();
 
-function init() {
 
-  getEvents();
+getEvents();
 
-}
 
 function getUsers() {
   db.Users.find().select("_id") 
@@ -190,16 +187,162 @@ function loadLists(eventIds) {
     ],
   };
 
+  let bodyList4 = {
+    listName: "Decorations",
+    items: [
+      {
+        itemName: "Balloons",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+      {
+        itemName: "Streamers",
+        assignedTo: user5,
+        status: "ordered",
+        assigned: true,
+      },
+      {
+        itemName: "Banner",
+        assignedTo: user4,
+        status: "needed",
+        assigned: true,
+      },
+    ],
+  };
+
+  let bodyList5 = {
+    listName: "Music requests",
+    items: [
+      {
+        itemName: "Post Malone",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+      {
+        itemName: "Britney Spears",
+        assignedTo: user5,
+        status: "ordered",
+        assigned: true,
+      },
+      {
+        itemName: "Maroon5",
+        assignedTo: user4,
+        status: "needed",
+        assigned: true,
+      },
+      {
+        itemName: "Rolling Stones",
+        assignedTo: user4,
+        status: "needed",
+        assigned: true,
+      },
+      {
+        itemName: "Green Day",
+        assignedTo: user4,
+        status: "needed",
+        assigned: true,
+      },
+    ],
+  };
+
+  let bodyList6 = {
+    listName: "Food",
+    items: [
+      {
+        itemName: "Cake",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+     ],
+  };
+
+  let bodyList7 = {
+    listName: "Decorations",
+    items: [
+      {
+        itemName: "Table toppers",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+      {
+        itemName: "Banners",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+     ],
+  };
+
+  let bodyList8 = {
+    listName: "Setup",
+    items: [
+      {
+        itemName: "Chairs",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+      {
+        itemName: "Coffee",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+     ],
+  };
+
+  let bodyList9 = {
+    listName: "Clean up",
+    items: [
+      {
+        itemName: "Chairs",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+      {
+        itemName: "Trash",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+      {
+        itemName: "Sweep",
+        assignedTo: user4,
+        status: "ordered",
+        assigned: true,
+      },
+     ],
+  };
+
   // create list and add items
   let eventId1 = eventIds[0];
+  let eventId2 = eventIds[1];
+  let eventId3 = eventIds[2];
+  let eventId4 = eventIds[3];
 
   createList(bodyList2, eventId1);
   createList(bodyList1, eventId1);
   createList(bodyList3, eventId1);
+  createList(bodyList4, eventId2);
+  createList(bodyList5, eventId2);
+  createList(bodyList6, eventId2);
+  createList(bodyList7, eventId3);
+  createList(bodyList8, eventId4);
+  createList(bodyList9, eventId4);
 
   addListItems(bodyList1, eventId1);
   addListItems(bodyList2, eventId1);
   addListItems(bodyList3, eventId1);
+  addListItems(bodyList4, eventId2);
+  addListItems(bodyList5, eventId2);
+  addListItems(bodyList7, eventId3);
+  addListItems(bodyList8, eventId4);
+  addListItems(bodyList9, eventId4);
 
   return 1;
 }
@@ -348,7 +491,9 @@ function loadAnnouncements(eventIds) {
         {new: true})
         .then((data) => {
           console.log(data);
-          // process.exit (0);
+          
+          console.log("Success! Data loaded.")
+          process.exit (0);
         })
         .catch((err) => {
           console.log(err);
@@ -356,3 +501,4 @@ function loadAnnouncements(eventIds) {
         });
   }
 
+  module.exports = {getEvents};
