@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import Events from "../components/Events";
 import SearchIcon from '@material-ui/icons/Search';
@@ -6,18 +6,22 @@ import API from "../utils/API";
 
 
 function Home() {
+  const [events, setEvents] = useState([]);
+
   useEffect(() => {
     loadEvents()
   }, [])
 
   function loadEvents() {
     API.getEvents()
-      .then(res => 
+      .then(res => {
         // setEvents(res.data) - potentially
-        console.log(res.data)
-      )
-      .catch(err => console.log(err));
+        console.log(res.data);
+        setEvents(res.data);
+      })
+    .catch(err => console.log(err));
   };
+
     return (
         <div>
             <div className="testimonial">
@@ -39,15 +43,10 @@ function Home() {
       <div>
          
         {/* map event component here */}
-        <div className="column">
+        {/* <div className="column> */}
+        <div className="columns is-desktop">
             {/* { events.length > 0 && events.map(event => */}
-                <Events 
-                // title={title}
-                // date={date}
-                // time={time}
-                // location={location}
-                />
-            {/* )} */}
+          {events.map((event)=> <Events title={event.eventName} date={event.eventDateTime} time={event.eventDateTime} location={event.location} image={event.eventImage} _id={event._id}></Events>)}
         </div>
       </div>
     </div>

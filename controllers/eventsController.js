@@ -55,7 +55,7 @@ module.exports = {
   findEventById: function(req, res) {
     // req.params.id --> event._id = "60ad393469e56e0a903434bc"
     console.log("entered eventsController/findById")
-    db.Events.findOne({id: req.params.id})
+    db.Events.findOne({_id: req.params.id})
     .populate({
       path: "lists.items",
       populate: "assignedTo"
