@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
+import { useParams } from "react-router-dom";
+import API from "../utils/API"
 
 
-const Announcements = ({ data }) => {
-    console.log(data);
+
+const Announcements = () => {
+    const [announcement, setAnnouncement] = useState([]);
+    const params = useParams();
+    const id = params.id;
+
+    useEffect(() => {
+        loadAnnouncements()
+    }, [])
+    function loadAnnouncements(){
+        console.log("enteredLoadAnnouncement")
+        API.getOneEvent(id)
+        .then(res => {
+            setAnnouncement(res.data.announcements)
+            // console.log(res.data.announcements)
+        })
+        .catch(err => console.log(err));
+    };
+
+    // console.log(announcement)
     return (
         <div>
-            {data.map(announcement =>
+            {announcement.map(announcement =>
                 <>
                     <p>
-                        {announcement.author}
+                        {announcement.author.username}
                     </p>
                     <p>
                         {announcement.text}
