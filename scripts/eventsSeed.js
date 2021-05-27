@@ -16,18 +16,25 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 // Connection to Users collection, removes collection and 
 // recreates it with seed data
 
-console.log(eventsData);
+loadEvents();
 
-db.Events
-  .deleteMany({})
-  .then(() => db.Events.collection.insertMany(eventsData))
-  .then(data => {
-    console.log(data.result.n + " records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+function loadEvents() {
+    console.log(eventsData);
+    
+    db.Events
+      .deleteMany({})
+      .then(() => db.Events.collection.insertMany(eventsData))
+      .then(data => {
+        console.log(data.result.n + " records inserted!");
+        process.exit(0);
+      })
+      .catch(err => {
+        console.error(err);
+        process.exit(1);
+      });
+
+}
+
+module.exports = {loadEvents};
 
 
