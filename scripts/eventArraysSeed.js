@@ -39,10 +39,13 @@ let user6 = "";
 let userIds = [];
 let eventIds = [];
 
+init();
 
+function init() {
 
-getEvents();
+  getEvents();
 
+}
 
 function getUsers() {
   db.Users.find().select("_id") 
@@ -341,7 +344,6 @@ function loadLists(eventIds) {
   addListItems(bodyList4, eventId2);
   addListItems(bodyList5, eventId2);
   addListItems(bodyList7, eventId3);
-  addListItems(bodyList8, eventId4);
   addListItems(bodyList9, eventId4);
 
   return 1;
@@ -501,4 +503,3 @@ function loadAnnouncements(eventIds) {
         });
   }
 
-  module.exports = {getEvents};
