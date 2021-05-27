@@ -11,11 +11,12 @@ require('dotenv').config();
 // const regexPhone = /^[2-9]\d{2}[2-9]\d{2}\d{4}$/;
 
 // Connect to mongoose
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", { 
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-  useFindAndModify: false });
+// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", { 
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+//   useCreateIndex: true,
+//   useFindAndModify: false });
+
 
 
 //   init();
@@ -276,3 +277,49 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 //   console.log(err);
 //   process.exit(1);
 // });
+
+// module.exports = {
+//   format_date: (date) => {
+//     // Format date as MM/DD/YYYY
+//     return date.toLocaleDateString();
+//   },
+//   format_time: (date) => {
+//     // convert to 12 hour clock 
+//     if (date.getHours() >= 13){
+//       return date.getHours()-12 + ":"+date.getMinutes()+"pm";
+//     } else {
+//       return date.getHours()+":"+date.getMinutes()+"am";
+//     }
+//     return time;
+
+//   }
+ 
+// };
+
+// let today = new Date();
+// let dd = String(today.getDate()).padStart(2, '0');
+// let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+// let yyyy = today.getFullYear();
+
+// today = yyyy + '-' + mm + '-' + dd + 'T12:00';
+
+
+
+
+convertTime("2021-06-03T20:00");
+
+function convertTime(dbDate) {
+  let newDate = Intl.DateTimeFormat(
+      'en', 
+      { weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "numeric", 
+        minute: "numeric", 
+        hour12: true 
+      })
+        .format(new Date(dbDate));
+
+  console.log(newDate);
+}
