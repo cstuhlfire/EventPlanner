@@ -6,7 +6,12 @@ import Lists from "../components/Lists";
 import API from "../utils/API"
 import { useParams } from "react-router-dom";
 
+
 function ViewEvent() {
+    const [event, setEvent] = useState([]);
+    const params = useParams();
+
+    const id = params.id;
     const testAnnouncements = [
         {
             "author": "Caitlyn",
@@ -27,37 +32,36 @@ function ViewEvent() {
         }
     ]
 
-    const params = useParams();
-    const id = params.id;
-    const [event, setEvent] = useState({});
-    const [announcements, setAnnouncements] = useState(testAnnouncements);
-    const [attendees, setAttendees] = useState([]);
-    const [lists, setLists] = useState(testLists);
-
-    useEffect(async () => {
-        const eventData = await API.getOneEvent(id);
-        setEvent(eventData);
-
-        // const announcementsData = await API.getAnnouncements(id);
-        // setAnnouncements(announcementsData);
-
-        const attendeesData = await API.getAttendees(id);
-        setAttendees(attendeesData);
-
-        const listsData = await API.getLists(id);
-        setLists(listsData);
+    useEffect(() => {
+        loadEvent()
     }, [])
+
+    
+    // const [announcements, setAnnouncements] = useState(testAnnouncements);
+    // const [attendees, setAttendees] = useState([]);
+    // const [lists, setLists] = useState(testLists);
+
+   
+
+    function loadEvent(){
+        console.log("enteredLoadEvent")
+        API.getOneEvent(id)
+        .then(res => {
+            setEvent(res.data)
+            console.log(res.data)
+        })
+        .catch(err => console.log(err));
+    };
 
     function saveList(event){
         event.preventDefault()
-
         let name = document.querySelector("#todo").value;
-    
         API.createList({
             name: name
         })
     }
-
+    console.log(id)
+    console.log(event)
         return (
             <div className="container">
             <div className="tile is-ancestor"> 
@@ -70,7 +74,7 @@ function ViewEvent() {
                             <ul>
                                 <li>
                                     <a href="#">
-                                        <Announcements data={announcements} />
+                                        <Announcements data={testAnnouncements} />
                                     </a>
                                 </li>
                             </ul>
@@ -79,9 +83,9 @@ function ViewEvent() {
                         <article className="tile is-child notification ">
                         <p className="title">Event Information</p>
                         <p className="subtitle">{event.description}</p>
-                        <p className="subtitle">{event.date}</p>
+                        <p className="subtitle">{event.eventDateTime}</p>
                         <p className="subtitle">{event.location}</p>
-                        <p className="subtitle">{attendees.length > 0 && <>Attendees: {attendees.length}</>}</p>
+                        {/* <p className="subtitle">{event.attendees.length > 0 && <>Attendees: {event.attendees.length}</>}</p> */}
                         </article>
                     </div>
                     <div className="todo tile  is-parent">
@@ -89,7 +93,7 @@ function ViewEvent() {
                             <h1>To Do</h1>
                           <input id="todo"placeholder="to do ..."></input>
                           <button onClick={saveList}>submit</button>
-                            <Lists data={lists} />
+                            <Lists data={testLists} />
                         </article>
                         {/* start comments */}
                     </div>
