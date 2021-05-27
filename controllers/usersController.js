@@ -63,6 +63,7 @@ module.exports = {
             return;
           } else {
             console.log("Success!");
+            console.log(user);
             // req.session.save(() => {
             //   req.session.user_id = userData.id;
             //   req.session.use_name = userData.username;
