@@ -75,6 +75,22 @@ module.exports = {
     .then(dbEventData => res.json(dbEventData))
     .catch(err => res.status(422).json(err));
   },
+  updateList: function(req, res){
+    // req.params.id -> event._id
+    // req.body.listName -> listName to update item on
+    // req.body.list_id -> list_id to update item on
+    db.Events
+      .findByIdAndUpdate({ _id: req.params.id }, {
+        $set: { "lists.$[list].listName": req.body.listName }
+      }, {
+        arrayFilters: [{
+          "list._id": req.body.list_id
+        }]
+      })
+    .then(dbEventData => res.json(dbEventData))
+    .catch(err => res.status(422).json(err));
+
+  },
   removeList: function(req, res) {
     // req.params.id -> eventId = "60ad393469e56e0a903434bc"
     // req.body.listId -> "60ae5f8c0e2223159c446885"
@@ -240,10 +256,10 @@ module.exports = {
   },
   updateAttendee: function(req, res) {
     // let req.params.id -> event._id = "60ad393469e56e0a903434bc"
-    // let req.body = { host: true}
+    // let req.body = { attendee: {_id: attendeeObjectId, attendee: attendee._id, host: true})
     db.Events
     .findByIdAndUpdate({ _id: req.params.id }, {
-        $set: { "attendees.$[attendee]": req.body.item }
+        $set: { "attendees.$[attendee]": req.body.attendee.host }
       }, {
         arrayFilters: [{
           "attendee.attendee": req.body.attendee,
