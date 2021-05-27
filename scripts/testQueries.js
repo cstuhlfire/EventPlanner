@@ -135,28 +135,28 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", 
 
 /////////// Testing update on single list items to existing list with single item and listname passed in ------ Success
 ///// Takes in entire item to update and item._id in order to do so
-let reqparamsid = "60ad393469e56e0a903434bc"
-let reqbody = {
-    listName: "Food",
-    list_id: "60ae5f1b52abc815710cb370",
-    item: {itemName: "Pizza", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: false},
-    item_id: "60ae8e8fec67d61a9ea54c8a"
-}
+// let reqparamsid = "60ad393469e56e0a903434bc"
+// let reqbody = {
+//     listName: "Food",
+//     list_id: "60ae5f1b52abc815710cb370",
+//     item: {itemName: "Pizza", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: false},
+//     item_id: "60ae8e8fec67d61a9ea54c8a"
+// }
 
 
-db.Events
-      .findByIdAndUpdate({ _id: reqparamsid }, {
-        $set: { "lists.$[list].items.$[item]": reqbody.item }
-      }, {
-        arrayFilters: [{
-          "list.listName": reqbody.listName,
-          "list._id": reqbody.list_id
-        },{
-          "item._id": reqbody.item_id
-        }]
-      })
-      .then(dbEventData => console.log(dbEventData))
-      .catch(err => console.log(err));
+// db.Events
+//       .findByIdAndUpdate({ _id: reqparamsid }, {
+//         $set: { "lists.$[list].items.$[item]": reqbody.item }
+//       }, {
+//         arrayFilters: [{
+//           "list.listName": reqbody.listName,
+//           "list._id": reqbody.list_id
+//         },{
+//           "item._id": reqbody.item_id
+//         }]
+//       })
+//       .then(dbEventData => console.log(dbEventData))
+//       .catch(err => console.log(err));
 
 
 ///////////// Testing add list items to event ID and listname passed in ---------- Success
@@ -218,37 +218,37 @@ db.Events
 
 /////////// Testing Add Comments ------------------ Success
 
-// // Comments test data
-// const eventId = "60ad393469e56e0a903434bc";
-// const body = {
-//     comments: [
-//       {author:  "60ad0b20bbba44045a0a0eb0", text: "What does Jeremy want for his bday this year?"},
-//       {author:  "60ad0b20bbba44045a0a0eb1", text: "Legos, Legos, Legos, and tigers."},
-//     ]}
+// Comments test data
+const eventId = "60ad393469e56e0a903434bc";
+const body = {
+    comments: [
+      {author:  "60ad0b20bbba44045a0a0eb0", text: "What does Jeremy want for his bday this year?"},
+      {author:  "60ad0b20bbba44045a0a0eb1", text: "Legos, Legos, Legos, and tigers."},
+    ]}
 
-// db.Events.findByIdAndUpdate({_id: eventId},
-//   {$push: {comments: body.comments}},
-//   {new: true})
-//   .then((data) => {
-//     console.log(data);
-//     process.exit(0);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//     process.exit(1);
-//   });
+db.Events.findByIdAndUpdate({_id: eventId},
+  {$push: {comments: body.comments}},
+  {new: true})
+  .then((data) => {
+    console.log(data);
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.log(err);
+    process.exit(1);
+  });
 /////////////////////////////////////////////////
 
 ////////////// Testing Delete Comment --------- Success
-// ////Event id
-// const eventId = "60ad393469e56e0a903434bc";
-// ////Comment id
-// const commentId = "60ae62a6d6b75315f82587e5"
+////Event id
+const eventId = "60ad393469e56e0a903434bc";
+////Comment id
+const commentId = "60ae62a6d6b75315f82587e5"
 
-// db.Events
-//   .updateOne({ _id: eventId }, {$pull: { comments: {_id: commentId}}})
-//   .then(dbEventData => console.log(dbEventData))
-//   .catch(err => console.log(err));
+db.Events
+  .updateOne({ _id: eventId }, {$pull: { comments: {_id: commentId}}})
+  .then(dbEventData => console.log(dbEventData))
+  .catch(err => console.log(err));
 ///////////////////////////////////////
 
 
