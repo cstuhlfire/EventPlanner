@@ -24,17 +24,20 @@ const Announcements = () => {
 
     // console.log(announcement)
     return (
-        <div>
-            {announcement.map(announcement =>
-                <>
+      <div className="is-parent">
+        <ul className="is-child is-scrollable">
+        {announcement.map(announcement =>
+                <li>
+                    <a href="#" style={{textDecoration: "none"}}>
                     <p>
                         {announcement.author.username}
-                    </p>
-                    <p>
+                        <br></br>
                         {announcement.text}
                     </p>
-                </>
-            )}
+                    </a>
+                </li>
+        )}
+        </ul>
         </div>
     );
 }
