@@ -306,20 +306,38 @@ require('dotenv').config();
 
 
 
-convertTime("2021-06-03T20:00");
+formatDate("2021-06-03T20:00");
+formatTime("2021-06-03T20:00");
 
-function convertTime(dbDate) {
+function formatDate(dbDate) {
+  // Returns data as:
+  // Day, Month, day, 20, 00:00 AM/PM
+
   let newDate = Intl.DateTimeFormat(
       'en', 
       { weekday: "long",
         year: "numeric",
         month: "long",
-        day: "numeric",
-        hour: "numeric", 
+        day: "numeric"
+      })
+        .format(new Date(dbDate));
+
+  console.log(newDate);
+  return (newDate);
+}
+
+function formatTime (dbDate) {
+  // Returns data as:
+  // Day, Month, day, yyyy, 00:00 AM/PM
+
+  let newTime = Intl.DateTimeFormat(
+      'en', 
+      { hour: "numeric", 
         minute: "numeric", 
         hour12: true 
       })
         .format(new Date(dbDate));
 
-  console.log(newDate);
+  console.log(newTime);
+  return (newTime);
 }
