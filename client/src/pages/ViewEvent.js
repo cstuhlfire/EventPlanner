@@ -48,6 +48,16 @@ function ViewEvent() {
         setLists(listsData);
     }, [])
 
+    function saveList(event){
+        event.preventDefault()
+
+        let name = document.querySelector("#todo").value;
+    
+        API.createList({
+            name: name
+        })
+    }
+
         return (
             <div className="container">
             <div className="tile is-ancestor"> 
@@ -77,8 +87,8 @@ function ViewEvent() {
                     <div className="todo tile  is-parent">
                         <article className="todo tile is-child notification is-info">
                             <h1>To Do</h1>
-                          <input placeholder="to do ..."></input>
-                          <button>submit</button>
+                          <input id="todo"placeholder="to do ..."></input>
+                          <button onClick={saveList}>submit</button>
                             <Lists data={lists} />
                         </article>
                         {/* start comments */}
