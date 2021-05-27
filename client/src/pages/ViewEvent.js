@@ -8,7 +8,11 @@ import { useParams } from "react-router-dom";
 
 
 function ViewEvent() {
-    const [event, setEvent] = useState([]);
+    const [chosenEvent, setChosenEvent] = useState([]);
+    const [lists, setLists] = useState([]);
+    const [chosenListId, setChosenListId] = useState("");
+    const [chosenList, setChosenList] = useState("");
+    const [chosenListItems, setChosenListItems] = useState([]);
     const params = useParams();
 
     const id = params.id;
@@ -36,18 +40,25 @@ function ViewEvent() {
         loadEvent()
     }, [])
 
-    
-    // const [announcements, setAnnouncements] = useState(testAnnouncements);
-    // const [attendees, setAttendees] = useState([]);
-    // const [lists, setLists] = useState(testLists);
-
+    function onListClick (event, listid) {
+        event.preventDefault();
+        console.log("List: "+listid+" was clicked")
+        setChosenListId(listid);
+        let [filteredList] = chosenEvent.lists.filter(list => list._id === listid);
+        let filteredItems = filteredList.items
+        console.log(filteredList)
+        console.log(filteredItems)
+        setChosenList(filteredList)
+        setChosenListItems(filteredItems)
+    }
    
-
     function loadEvent(){
         console.log("enteredLoadEvent")
         API.getOneEvent(id)
         .then(res => {
-            setEvent(res.data)
+            setChosenEvent(res.data)
+            setLists(res.data.lists)
+            console.log(res.data.lists)
             console.log(res.data)
         })
         .catch(err => console.log(err));
@@ -61,45 +72,79 @@ function ViewEvent() {
         })
     }
     console.log(id)
-    console.log(event)
-        return (
-            <div className="container">
+    console.log(chosenEvent)
+    console.log(lists)
+    console.log(chosenList)
+    return (
+            
+        <div className="container">
+
             <div className="tile is-ancestor"> 
+                
                 <div className="desc tile is-vertical is-8">
-                    <div className="tile is-12">
-                    <div className="tile is-parent is-vertical">
-                        <article className="announcementstile is-child notification is-primary">
-                        <p className="title">Announcements </p>
-                            {/* start sticky note here */}
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        <Announcements data={testAnnouncements} />
-                                    </a>
-                                </li>
-                            </ul>
-                        </article>
                     
-                        <article className="tile is-child notification ">
-                        <p className="title">Event Information</p>
-                        <p className="subtitle">{event.description}</p>
-                        <p className="subtitle">{event.eventDateTime}</p>
-                        <p className="subtitle">{event.location}</p>
-                        {/* <p className="subtitle">{event.attendees.length > 0 && <>Attendees: {event.attendees.length}</>}</p> */}
-                        </article>
+                    <div className="tile">
+                        
+                        <div className="tile is-parent is-vertical">
+
+                            <article className="tile is-child notification ">
+                                <p className="title">Event Information</p>
+                                <p className="subtitle">{chosenEvent.description}</p>
+                                <p className="subtitle">{chosenEvent.eventDateTime}</p>
+                                <p className="subtitle">{chosenEvent.location}</p>
+                                {/* <p className="subtitle">{event.attendees.length > 0 && <>Attendees: {event.attendees.length}</>}</p> */}
+                            </article>
+                            
+                            <article className="announcements tile is-child notification is-primary">
+                                <p className="title">Announcements </p>
+                                {/* start sticky note here */}
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <Announcements data={testAnnouncements} />
+                                        </a>
+                                    </li>
+                                </ul>
+                            </article>
+
+                        </div>
+
+
+                        <div className="tile is-parent is-vertical">
+
+                            <div className="todo tile is-child">
+                                <article className="todo notification is-info">
+                                    <h1>To Do's:</h1>
+                                    <input id="todo"placeholder="add a to do ..."></input>
+                                    <button onClick={saveList}>submit</button>
+                                    {/* {lists.map(list=> <Lists listName={list.listName} listid={list._id} onListClick={onListClick}/>)} */}
+                                    {lists.map(list=> <button className="button" id={list._id} onClick={(event) => onListClick(event, list._id)} >{list.listName}</button>)}
+                                    {/* <button onClick={props.onListClick} listid={props.listId}>{props.listName}</button> */}
+
+                                </article>
+                            </div>
+                            <div className="todo tile is-child">
+                                <article className="todo notification is-info">
+                                    {/* <h1>{chosenList.listName}</h1> */}
+                                    {/* <input id="todo"placeholder="to do ..."></input>
+                                    <button onClick={saveList}>submit</button> */}
+                                    {chosenList === "" ? <h3>Choose a to-do list above</h3> : <h1>{chosenList.listName}</h1>}
+                                    {chosenList === "" ? "" : <input id="todo"placeholder={`add to ${chosenList.listName} ...`}></input> }
+                                    {chosenList === "" ? "" : <button onClick={saveList}>submit</button> }
+                                    {chosenList === "" ? "" : chosenListItems.map(item => <p>{item.itemName}</p>)}
+                                    {/* <Lists data={testLists} /> */}
+                                </article>
+                                {/* start comments */}
+                            </div>
+
+                        </div>
+
+
                     </div>
-                    <div className="todo tile  is-parent">
-                        <article className="todo tile is-child notification is-info">
-                            <h1>To Do</h1>
-                          <input id="todo"placeholder="to do ..."></input>
-                          <button onClick={saveList}>submit</button>
-                            <Lists data={testLists} />
-                        </article>
-                        {/* start comments */}
-                    </div>
-                    </div>
+                    
                 </div>
-                 <div className="comments tile is-parent is-scrollable">
+
+                <div className="comments tile is-parent is-scrollable">
                     <article className="comments tile is-child notification is-success">
                     <div className="content">
                         <p className="title">Comments </p>
@@ -171,9 +216,11 @@ function ViewEvent() {
                     </div>
                     </article>
                 </div> 
+           
             </div>
+
         </div>
-        )
+    )
 }
 
 export default ViewEvent

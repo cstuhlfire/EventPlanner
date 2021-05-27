@@ -18,6 +18,27 @@ color: purple;
     overflow-x:hidden;
 }
 
+.button {
+  padding: 15px 25px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-image: linear-gradient(to right, rgb(0, 219, 222),	rgb(252, 0, 255));
+  border: none;
+  border-radius: 15px; 
+}
+
+.button:hover {
+  background-color: purple
+}
+
+.button:active {
+background-color: purple;
+transform: translateY(4px);
+}
+
 /* sticky note */
 
 body {
@@ -149,3 +170,5 @@ body {
     display: flex;
     justify-content: center;
   }
+
+  
