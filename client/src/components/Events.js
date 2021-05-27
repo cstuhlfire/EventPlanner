@@ -8,17 +8,18 @@ import { Link } from "react-router-dom";
 function Events(props) {
   return (
     <div>
-      {/* <div class="cc columns features"> */}
-      <div class="cc features">
-        {/* <div class="column is-one-fourth"> */}
-        <div class="column">
-          <div class="card card is-shady">
-            <div class="card-image">
-              <figure class="image is-4by3">
+      {/* <div className="cc columns features"> */}
+      {/* <div  className="cc features"> */}
+      <div  className="cc">
+        {/* <div className="column is-one-fourth"> */}
+        <div className="column">
+          <div className="card is-shady">
+            <div className="card-image">
+              <figure className="image is-4by3">
                 <img
                   src={balloons}
                   alt="Placeholder image"
-                  class="modal-button"
+                  className="modal-button"
                   data-target="modal-image2"
                 ></img>
               </figure>
@@ -28,15 +29,15 @@ function Events(props) {
                 <AddIcon></AddIcon>
               </button>
             </div>
-            <div class="card-content">
-              <div class="content">
-                <h4>{props.title}</h4>
+            <div className="card-content">
+              <div className="content custom-content">
+                <h5>{props.title}</h5>
                 <p>{props.date}</p>
                 <p>{props.time}</p>
                 <p>{props.location}</p>
                 <Link to={"/event/"+props._id} style={{textDecoration: "none"}}>
                 <span
-                  class="button is-link modal-button"
+                  className="button is-link modal-button"
                   data-target="modal-image2"
                 >
                   View Event
