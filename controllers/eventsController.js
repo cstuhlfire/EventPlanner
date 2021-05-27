@@ -77,14 +77,14 @@ module.exports = {
   },
   updateList: function(req, res){
     // req.params.id -> event._id
+    // req.params.list_id -> list_id to update item on
     // req.body.listName -> listName to update item on
-    // req.body.list_id -> list_id to update item on
     db.Events
       .findByIdAndUpdate({ _id: req.params.id }, {
         $set: { "lists.$[list].listName": req.body.listName }
       }, {
         arrayFilters: [{
-          "list._id": req.body.list_id
+          "list._id": req.params.list_id
         }]
       })
     .then(dbEventData => res.json(dbEventData))
@@ -93,7 +93,7 @@ module.exports = {
   },
   removeList: function(req, res) {
     // req.params.id -> eventId = "60ad393469e56e0a903434bc"
-    // req.body.listId -> "60ae5f8c0e2223159c446885"
+    // req.params.list_id -> "60ae5f8c0e2223159c446885"
     db.Events
     .updateOne({ _id: req.params.id }, 
       {$pull: { lists: {_id: req.body.listId}}})
@@ -102,11 +102,10 @@ module.exports = {
   },
   addListItem: function(req, res) {
     // req.params.id -> event._id "60ad393469e56e0a903434bc"
+    // req.params.list_id: "60ae5f1b52abc815710cb370",
     // req.body -> {
     // listName: "Food",
-    // list_id: "60ae5f1b52abc815710cb370",
-    //item: [  {itemName: "Cookies", assignedTo: "60ad0b20bbba44045a0a0eb0", status: "needed", assigned: true},
-    //          {itemName: "Pizza", assignedTo: "60ad0b20bbba44045a0a0eb1", status: "needed", assigned: true}]
+    // item:  {itemName: "Cookies", assignedTo: "60ad0b20bbba44045a0a0eb0", status: "needed", assigned: true}}
     db.Events
       .updateOne({ _id: req.params.id }, {
         // push lists[1].items 
@@ -114,7 +113,7 @@ module.exports = {
         }, {
         arrayFilters: [{
           "list.listName": req.body.listName,
-          "list._id": req.body.list_id       
+          "list._id": req.params.list_id       
         }]
       })
     .then(dbEventData => res.json(dbEventData))
@@ -123,19 +122,19 @@ module.exports = {
   },
   updateListItem: function(req, res){
     // req.params.id -> event._id
-    // req.body.listName -> listName to update item on
-    // req.body.list_id -> list_id to update item on
-    // req.body.item_id -> id of item we want to update
-    // req.body.item -> entire item object, with update values
+    // req.params.list_id -> list_id to update item on
+    // req.params.item_id -> id of item we want to update
+    // req.body: {listName: listName
+    //      item:  {itemName: "Chocolate Chip Cookies", assignedTo: "60ad0b20bbba44045a0a0eb0", status: "needed", assigned: true}}
     db.Events
       .findByIdAndUpdate({ _id: req.params.id }, {
         $set: { "lists.$[list].items.$[item]": req.body.item }
       }, {
         arrayFilters: [{
           "list.listName": req.body.listName,
-          "list._id": req.body.list_id
+          "list._id": req.params.list_id
         },{
-          "item._id": req.body.item_id
+          "item._id": req.params.item_id
         }]
       })
     .then(dbEventData => res.json(dbEventData))
@@ -144,18 +143,18 @@ module.exports = {
   },
   removeListItem: function(req, res) {
     // req.params.id -> "60ad393469e56e0a903434bc"
+    // req.params.list_id: "60ae5f1b52abc815710cb370",
+    // req.params.item_id:  "60ae5fc8d6dbfb15a6c987bd"
     // req.body = {
     // listName: "Food",
-    // listId: "60ae5f1b52abc815710cb370",
-    // itemId:  "60ae5fc8d6dbfb15a6c987bd"
     // }
     db.Events
       .updateOne({ _id: req.params.id }, {
-        $pull: { "lists.$[list].items": {_id: req.body.itemId} }
+        $pull: { "lists.$[list].items": {_id: req.params.item_id} }
       }, {
         arrayFilters: [{
           "list.listName": req.body.listName,
-          "list._id": req.body.listId
+          "list._id": req.params.list_id
         }]
       })
     .then(dbEventData => res.json(dbEventData))
@@ -177,14 +176,14 @@ module.exports = {
   },
   updateComment: function(req, res) {
     // let req.params.id -> event._id = "60ad393469e56e0a903434bc"
-    // let req.body = { text: Updated comment, comment: {_id: "objectId", author: "ObjectId"}
+    // let req.params.comment_id = "<objectId>"
+    // let req.body = { text: Updated comment }
     db.Events
     .findByIdAndUpdate({ _id: req.params.id }, {
         $set: { "comments.$[comment]": req.body.text }
       }, {
         arrayFilters: [{
-          "comment._id": req.body.comment_id,
-          "comment.author": req.body.comment.author
+          "comment._id": req.params.comment_id
         }]
       })
     .then(dbEventData => res.json(dbEventData))
@@ -194,10 +193,10 @@ module.exports = {
     ////Event id
     // req.params.id = "60ad393469e56e0a903434bc";
     ////Comment id
-    // req.body.comment_id = "60ae62a6d6b75315f82587e5"
+    // req.params.comment_id = "60ae62a6d6b75315f82587e5"
     db.Events
     .updateOne({ _id: req.params.id }, 
-      {$pull: { comments: {_id: req.body.comment_id}}})
+      {$pull: { comments: {_id: req.params.comment_id}}})
     .then(dbEventData => res.json(dbEventData))
     .catch(err => res.status(422).json(err))
   },
@@ -218,13 +217,14 @@ module.exports = {
   },
   updateAnnouncement: function(req, res) {
     // let req.params.id -> event._id = "60ad393469e56e0a903434bc"
-    // let req.body = { announcement_id: "ObjectId", text: "Feel free to show up early!" }
+    // let req.params.announcement_id -> announcement_id: "ObjectId","
+    // let req.body = {  text: "Feel free to show up early!" }
     db.Events
     .findByIdAndUpdate({ _id: req.params.id }, {
         $set: { "announcements.$[attendee]": req.body.text }
       }, {
         arrayFilters: [{
-          "announcement._id": req.body.announcement_id
+          "announcement._id": req.params.announcement_id
         }]
       })
     .then(dbEventData => res.json(dbEventData))
@@ -234,10 +234,10 @@ module.exports = {
     // ////Event id
     // req.params.id = "60ad393469e56e0a903434bc";
     // ////Comment id
-    // req.body.announcement_id = "60ae7ce7bc24ae18c91532c1"
+    // req.params.announcement_id = "60ae7ce7bc24ae18c91532c1"
     db.Events
       .updateOne({ _id: req.params.id }, 
-        {$pull: { announcements: {_id: req.body.announcement_id}}})
+        {$pull: { announcements: {_id: req.params.announcement_id}}})
       .then(dbEventData => res.json(dbEventData))
       .catch(err => res.status(422).json(err));
   },
@@ -256,14 +256,15 @@ module.exports = {
   },
   updateAttendee: function(req, res) {
     // let req.params.id -> event._id = "60ad393469e56e0a903434bc"
-    // let req.body = { attendee: {_id: attendeeObjectId, attendee: attendee._id, host: true})
+    // let req.params.attendee_id -> attendee._id = "ObjectId"
+    
+    // let req.body = {   host: true})
     db.Events
     .findByIdAndUpdate({ _id: req.params.id }, {
-        $set: { "attendees.$[attendee]": req.body.attendee.host }
+        $set: { "attendees.$[attendee]": req.body.host }
       }, {
         arrayFilters: [{
-          "attendee.attendee": req.body.attendee,
-          "attendee._id": req.body.attendee_id
+          "attendee._id": req.params.attendee_id
         }]
       })
     .then(dbEventData => res.json(dbEventData))
@@ -273,10 +274,10 @@ module.exports = {
     // ////Event id
     // req.params.id = "60ad393469e56e0a903434bc";
     // ////Comment id
-    // req.body.attendee_id = "60ae7ed3ee8e1a1900beabac"
+    // req.params.attendee_id = "60ae7ed3ee8e1a1900beabac"
     db.Events
       .updateOne({ _id: req.params.id }, 
-        {$pull: { attendees: {_id: req.body.attendee_id}}})
+        {$pull: { attendees: {_id: req.params.attendee_id}}})
     .then(dbEventData => res.json(dbEventData))
     .catch(err => res.status(422).json(err));
   }

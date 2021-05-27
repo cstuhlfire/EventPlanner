@@ -15,16 +15,16 @@ router.route("/:id")
   // Matches with "/api/events/:id/list/"
 router.route(":id/list/")
   .post(eventsController.addList)
-// Matches with "/api/events/:id/list/:listName"
-router.route(":id/list/:listName")
+// Matches with "/api/events/:id/list/:list_id"
+router.route(":id/list/:list_id")
   .put(eventsController.updateList)
   .delete(eventsController.removeList);
 
 // Matches with "/api/events/:id/list/:listName/items/"
-router.route(":id/list/:listName/items/")
+router.route(":id/list/:list_id/items/")
   .post(eventsController.addListItem)
-// Matches with "/api/events/:id/list/:listName/items/:item_id"
-router.route(":id/list/:listName/items/:item_id")
+// Matches with "/api/events/:id/list/:list_id/items/:item_id"
+router.route(":id/list/:list_id/items/:item_id")
   .put(eventsController.updateListItem)
   .delete(eventsController.removeListItem)
 
