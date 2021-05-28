@@ -11,28 +11,19 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-      <>
-        <Navbar />
-        <Router>
-          <Switch>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/CreateAccount">
-            <CreateAccount />
-          </Route>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/CreateEvent">
-           <CreateEvent />
-          </Route>
-          <Route path="/event/:id" component={ViewEvent}>
-           <ViewEvent />
-          </Route>
+    <>
+      <Router>
+        <Navbar/>
+        <Switch>
+            <Route exact path="/login" component={Login}/>
+            <Route exact path="/CreateAccount"component={CreateAccount}/>
+            <Route exact path="/" component={Home}/>
+            <Route exact path="/CreateEvent" component={CreateEvent}/>
+            <Route path="/event/:id" component={ViewEvent}/>
+            <Route path="/*" component={Home}/>
           </Switch>
-        </Router>
-      </>
+      </Router>
+    </>
   );
 }
 
