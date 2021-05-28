@@ -25,7 +25,7 @@ const Announcements = () => {
     // console.log(announcement)
     return (
       <div className="is-parent">
-        <ul className="is-child is-scrollable">
+        <ul className="is-child">
         {announcement.map(announcement =>
                 <li>
                     <a href="#" style={{textDecoration: "none"}}>
