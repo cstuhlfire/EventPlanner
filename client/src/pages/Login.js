@@ -24,19 +24,18 @@ import API from "../utils/API";
 
         // let userinput = document.querySelector(`#username`).value;
         // let passwordinput = document.querySelector(`#password`).value;
-        let userinput = loginObj.username;
-        let passwordinput = loginObj.password;
-
+       
         API.checkUser({
             username: loginObj.username,
             password: loginObj.password
         })
         .then((res) => {
             setLoginObj({...loginObj, username: res.data.user, 
-                                        userID: res.data.user_id, 
+                                        userId: res.data.user_id, 
                                         loggedIn: true,
                                         loginFailed: false});
-
+            
+            sessionStorage.setItem("loginInfo", res.data.user_id);
             return true;
         })
         .catch((err) => {

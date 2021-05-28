@@ -12,8 +12,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
   return (
       <>
-        <Navbar />
         <Router>
+        <Navbar />
           <Switch>
           <Route exact path="/login">
             <Login />

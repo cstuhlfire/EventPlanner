@@ -6,8 +6,15 @@ import { Link } from "react-router-dom";
 
 
 function Events(props) {
+  let userId = (sessionStorage.getItem("loginInfo"));
+
   function handleAddEvent(eventId) {
+    console.log("User id:"+userId);
     console.log("Event id: "+ eventId);
+
+    if (userId){
+      console.log("save user to event");
+    }
   }
 
   return (
@@ -30,7 +37,12 @@ function Events(props) {
             </div>
             <div>
               <button className="joinBtn">
+                {(userId) ? 
                 <AddIcon onClick={() => handleAddEvent(props._id)}></AddIcon>
+                : <AddIcon onClick={
+                    <Link to="/login"></Link>
+                }></AddIcon>
+                }
               </button>
             </div>
             <div className="card-content">
