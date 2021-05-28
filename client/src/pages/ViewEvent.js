@@ -18,29 +18,12 @@ function ViewEvent() {
   const [chosenList, setChosenList] = useState("");
   const [chosenListItems, setChosenListItems] = useState([]);
   const params = useParams();
-
   const id = params.id;
-  const testAnnouncements = [
-    {
-      author: "Caitlyn",
-      text: "Testing!!! lol :)",
-    },
-  ];
-  const testLists = [
-    {
-      listName: "Test List Name",
-      items: [
-        {
-          itemName: "test item name",
-          assignedTo: "caitlyn",
-          status: "Done",
-          assigned: "Yesterday",
-        },
-      ],
-    },
-  ];
-
+  // let userId = (sessionStorage.getItem("loginInfo"));
+  const [currentUser, setCurrentUser] = useState("");
+  
   useEffect(() => {
+    setCurrentUser("60b08331637701535d45f188");
     loadEvent();
   }, []);
 
@@ -56,6 +39,7 @@ function ViewEvent() {
     console.log(filteredItems);
     setChosenList(filteredList);
     setChosenListItems(filteredItems);
+    loadEvent();
   }
 
   function loadEvent() {
@@ -77,24 +61,31 @@ function ViewEvent() {
   }
 
     function saveList(event) {
-        event.preventDefault();
-        let listNameInput = document.querySelector("#todo").value;
-        console.log(listNameInput);
-
-        API.createList(id, {
-        listName: listNameInput
-        });
+      event.preventDefault();      
+      let listNameInput = document.querySelector("#todo").value;      
+      API.createList(id, {      
+        listName: listNameInput      
+      })      
+      .catch((err) => console.log(err));      
+      API.getOneEvent(id)      
+      .then((res) => {      
+        setLists(res.data.lists);      
+      })
+      .catch((err) => console.log(err));
+      loadEvent();
     }
     
-    function saveListItem(event, listIdToAdd) {
-        event.preventDefault();
-        let listNameInput = document.querySelector("#todo").value;
-        console.log(listNameInput);
-
-        API.addListItem(id, listIdToAdd, {
-            listName: listNameInput
-        });
-    
+    function saveListItem(event, listIdToAdd, chosenLiName, chosenLi) {
+      event.preventDefault();
+      let listItemInput = document.querySelector("#todoitem").value;
+      console.log(listItemInput);
+      let item = {itemName: listItemInput, assignedTo: currentUser, status: "needed", assigned: true}
+      API.addListItem(id, listIdToAdd, { listName:chosenList.listName,
+        item
+      })
+      .catch((err) => console.log(err));
+      setChosenListItems([...chosenListItems, item]);
+      loadEvent();
     }
 
     function updateListItem(event, listIdToUpdate, item, update) {
@@ -125,7 +116,7 @@ function ViewEvent() {
           <div className="tile">
             <div className="tile is-parent is-vertical">
               <div className="tile is-child notification">
-                <p className="title">Event Information</p>
+                <p className="title">{chosenEvent.eventName}</p>
                 <p className="subtitle">{chosenEvent.description}</p>
                 <p className="subtitle">{chosenEventDate}</p>
                 <p className="subtitle">{chosenEventTime}</p>
@@ -203,12 +194,12 @@ function ViewEvent() {
                                         <input
                                             className="ievent input is-primary"
                                             type="text"
-                                            id="todo"
+                                            id="todoitem"
                                             placeholder={`add to ${chosenList.listName}...`}>
                                         </input>
                                     </div>
                                     <div className="control">
-                                    <button className="bt" onClick={(e) => saveListItem(e, chosenListId, chosenList.listName)}>submit</button>
+                                    <button className="bt" onClick={(e) => saveListItem(e, chosenListId, chosenList.listName, chosenList)}>submit</button>
                                     </div>
                             </div>
 
@@ -233,7 +224,7 @@ function ViewEvent() {
                                             </>
                                         )
                                     }
-                                    <h5>Status: {item.status}</h5>
+                                    {/* <h5>Status: {item.status}</h5> */}
                                   {/* <div className="field has-addons todoInp">
                                     <div class="control">
                                         <input
