@@ -170,7 +170,7 @@ module.exports = {
     // ]}
     db.Events
     .findByIdAndUpdate({_id: req.params.id},
-      {$push: {comments: req.body.comments}},
+      {$push: {comments: req.body}},
       {new: true})
     .then(data => res.json(data))
     .catch(err => res.status(422).json(err))
@@ -211,7 +211,7 @@ module.exports = {
     //     ]}
 
     db.Events.findByIdAndUpdate({_id: req.params.id},
-      {$push: {announcements: req.body.announcements}},
+      {$push: {announcements: req.body}},
       {new: true})
     .then(data => res.json(data))
     .catch(err => res.status(422).json(err))
