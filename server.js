@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3001;
 
 // Define middleware
 const store = new MongoDBStore({
-  uri: 'mongodb://localhost/mulletevents',
+  uri: process.env.MONGODB_URI || "mongodb://localhost/mulletevents",
   collection: 'mulletSession'
 });
 
