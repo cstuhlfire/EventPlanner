@@ -1,6 +1,7 @@
 const express = require("express");
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
+require("dotenv").config();
 
 const mongoose = require("mongoose");
 const routes = require("./routes");
@@ -44,7 +45,11 @@ app.use(routes);
 
 // Connect to the Mongo DB
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist");
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/mulletevents", { 
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false });
 
 // Start the API server
 app.listen(PORT, function() {

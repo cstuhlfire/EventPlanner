@@ -3,6 +3,7 @@ import "./Events.css";
 import AddIcon from "@material-ui/icons/Add";
 import balloons from "../utils/images/balloons.jpg";
 import { Link } from "react-router-dom";
+import API from "../utils/API";
 
 
 function Events(props) {
@@ -11,6 +12,19 @@ function Events(props) {
   function handleAddEvent(eventId) {
     console.log("User id:"+userId);
     console.log("Event id: "+ eventId);
+    
+
+    API.addAttendee(eventId, {
+      attendee: userId, host: false
+      })
+      .then((res) => {
+        console.log(res.data);
+        return true;
+      })
+      .catch((err) => {
+          console.log(err);
+          return false;
+  })
 
     if (userId){
       console.log("save user to event");
@@ -39,9 +53,7 @@ function Events(props) {
               <button className="joinBtn">
                 {(userId) ? 
                 <AddIcon onClick={() => handleAddEvent(props._id)}></AddIcon>
-                : <AddIcon onClick={
-                    <Link to="/login"></Link>
-                }></AddIcon>
+                : <Link to="/login"><AddIcon ></AddIcon></Link>
                 }
               </button>
             </div>
@@ -51,14 +63,22 @@ function Events(props) {
                 <p>{props.date}</p>
                 <p>{props.time}</p>
                 <p>{props.location}</p>
-                <Link to={"/event/"+props._id} style={{textDecoration: "none"}}>
-                <span
-                  className="button is-link modal-button"
-                  data-target="modal-image2"
-                >
-                  View Event
-                </span>
-                </Link>
+                {(userId) ?
+                    <Link to={"/event/"+props._id} style={{textDecoration: "none"}}>
+                    <span
+                      className="button is-link modal-button"
+                      data-target="modal-image2">
+                      View Event
+                    </span>
+                    </Link>
+                  : <Link to={"/login"} style={{textDecoration: "none"}}>
+                  <span
+                    className="button is-link modal-button"
+                    data-target="modal-image2">
+                    View Event
+                  </span>
+                  </Link>
+                }
               </div>
             </div>
           </div>

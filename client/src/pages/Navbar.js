@@ -1,9 +1,43 @@
-import React from 'react'
+import React, {  useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import API from "../utils/API";
 import "./Navbar.css"
 
 function Navbar() {
     let userId = (sessionStorage.getItem("loginInfo"));
+    let username = (sessionStorage.getItem("loginName"));
+    let [userObj, setUserObj] = useState({username: "",
+                                            userId: "",
+                                            x: 1});
+
+    useEffect(() => {
+        loadUser();
+      }, []);
+
+      function loadUser() {
+        // API.hiUser(userId)
+        // .then((res) => {
+        //     setUserObj({...userObj, username: res.data.user, 
+        //                                 userId: res.data.user_id});
+        //     console.log("username: "+username);                                
+            
+        // })
+        // .catch((err) => {
+        //     throw (err);
+        // })
+        setUserObj({...userObj, username: "cfire"});
+      }
+
+      function logout() {
+          sessionStorage.clear();
+          API.byeUser();
+          setUserObj({username: "", userId: ""});
+      }
+
+      function setNavbarRerender() {
+          let i = userObj.x;
+          setUserObj({...userObj, x: i++})
+      }
     
     document.addEventListener('DOMContentLoaded', () => {
 
@@ -42,25 +76,39 @@ function Navbar() {
                 </div>
                 <div id="navbarBasicExample" className="navbar-menu">
                     <div className="navbar-start">
-                    <Link to="/" className="navbar-item">
+                    <Link to="/" onClick={setNavbarRerender} className="navbar-item">
                         Home
                     </Link>
                     <Link to="/createevent" className="navbar-item" style={{textDecoration: "none"}}>
                         Create Event
                     </Link>
                     </div>
+
                     <div className="navbar-end">
                     <div className="navbar-item">
                         <div className="LandS">
-                        <Link to="/createaccount" className="LandS" style={{textDecoration: "none"}}>
-                            <strong> Sign up | </strong>
-                        </Link>
-                        <Link to="/login" className="LandS" style={{textDecoration: "none"}}>
-                            Log in 
-                        </Link>
+                        {(!userId) ? 
+                            <>
+                                <Link to="/createaccount" className="LandS" style={{textDecoration: "none"}}>
+                                    <strong> Sign up | </strong>
+                                </Link>
+                                <Link to="/login" className="LandS" style={{textDecoration: "none"}}>
+                                    Log in 
+                                </Link> </>
+
+                            : <>
+                                <Link to="/" className="LandS" style={{textDecoration: "none"}}>
+                                    <strong> Welcome! You are logged in as {username}  | </strong>
+                                </Link>
+                                <Link to="/login" onClick={logout} className="LandS" style={{textDecoration: "none"}}>
+                                    Logout 
+                                </Link> 
+                             </>
+                            }
                         </div>
                     </div>
                     </div>
+                    
                 </div>
             </nav>
         </div>
