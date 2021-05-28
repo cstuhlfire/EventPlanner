@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import "./Navbar.css"
 
 function Navbar() {
-
+    let userId = (sessionStorage.getItem("loginInfo"));
+    
     document.addEventListener('DOMContentLoaded', () => {
 
         // Get all "navbar-burger" elements

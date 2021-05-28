@@ -1,174 +1,334 @@
-h1{
-color: purple;
-
+h1 {
+  color: purple;
 }
 
 .comments {
-    margin-top: 3%;
+  margin-top: 3%;
 }
 .desc {
-    height: 20%;
-    margin-top: 3%;
+  height: 20%;
+  margin-top: 3%;
 }
 
 .media-content {
-    width: 50px;
-    height: 200px;
-    overflow-y: scroll;
-    overflow-x:hidden;
+  width: 50px;
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.announcement-content {
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.announcement-content::-webkit-scrollbar {
+  -webkit-appearance: none;
 }
 
-.button {
-  padding: 10px 25px;
+.announcement-content::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+
+.announcement-content::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.announcement-content::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white; /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, .5);
+}
+
+.listItemCons{
+  color:rgb(73, 0, 122);
+  background-image: linear-gradient(
+    0deg,
+    rgb(0, 219, 222),
+    rgb(255, 255, 255) 10%
+  );
+  border-radius: 4px;
+  border-style: solid;
+  border-color: rgb(174, 0, 255);
+  margin-bottom: 6px;
+}
+
+
+.bigButton {
+  padding: 15px 25px;
   font-size: 24px;
   text-align: center;
   cursor: pointer;
   outline: none;
   color: #fff;
-  background-image: linear-gradient(to right, rgb(0, 219, 222),	rgb(252, 0, 255));
+  background-image: linear-gradient(
+    to right,
+    rgb(0, 219, 222),
+    rgb(252, 0, 255)
+  );
   border: none;
-  border-radius: 15px; 
+  border-radius: 15px;
+}
+
+.listButton {
+  margin-bottom: 5px;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-image: linear-gradient(
+    to right,
+    rgb(0, 219, 222),
+    rgb(252, 0, 255)
+  );
+  border: none;
+  border-radius: 15px;
 }
 
 .button:hover {
-  background-color: purple
+  background-color: purple;
 }
 
 .button:active {
-background-color: purple;
-transform: translateY(4px);
+  background-color: purple;
+  transform: translateY(4px);
+}
+
+.todoInp {
+  align-items: center;
+  justify-content: center!important;
+  width: 100%;
+}
+
+.bt {
+  height: 40px;
+  border-radius: 6%;
+  background-color: blueviolet;
+  border:aqua;
+  color: white;
+}
+.ievent {
+  border-color: blueviolet !important;
+  /* display: flex; */
+  justify-content: center;
+  width: 100%;
+  align-items: center;
 }
 
 /* sticky note */
 
 body {
-    margin: 20px auto;
-    font-family: 'Lato';
-    background:#666;
-    color:black;
-  }
-   
-  *{
-    margin:0;
-    padding:0;
-  }
-   
-  h2 {
-    font-weight: bold;
-    font-size: 2rem;
-  }
-   
-  p {
-    font-size: 1rem;
-    font-weight: normal;
-    font-family: 'Reenie Beanie';
-  }
-   
-  ul,li{
-    list-style:none;
-  }
-  ul{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  ul li a{
-    text-decoration:none;
-    color:#000 !important;
-    background:#ffc;
-    display:block;
-    height:10em;
-    width:10em;
-    padding:1em;
-  }
-  ul li{
-    margin:1em;
-  }
+  margin: 20px auto;
+  /* font-family: 'Lato'; */
+  /* background:#666 */
+  color: black;
+}
 
-  ul li:nth-child(even) a{
-    position:relative;
-    top:5px;
-    background:#cfc;
-  }
-  ul li:nth-child(3n) a{
-    position:relative;
-    top:-5px;
-    background:#ccf;
-  }
+* {
+  margin: 0;
+  padding: 0;
+}
 
-  ul li a{
-    transform: rotate(-6deg);
-  }
+h2 {
+  font-weight: bold;
+  font-size: 2rem;
+}
 
-  ul li:nth-child(even) a{
-    transform:rotate(4deg);
-    position:relative;
-    top:5px;
-  }
-  ul li:nth-child(3n) a{
-    transform:rotate(-3deg);
-    position:relative;
-    top:-5px;
-  }
-  ul li:nth-child(5n) a{
-    transform:rotate(5deg);
-    position:relative;
-    top:-10px;
-  }
+p {
+  font-size: 1rem;
+  font-weight: normal;
+  /* font-family: 'Reenie Beanie'; */
+}
 
-  ul li a{
-    text-decoration:none;
-    color:#000;
-    background:#ffc;
-    display:block;
-    height:10em;
-    width:10em;
-    padding:1em;
-    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-  }
+ul,
+li {
+  list-style: none;
+}
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+ul li a {
+  text-decoration: none;
+  color: #000 !important;
+  background: #ffc;
+  display: block;
+  height: 10em;
+  width: 10em;
+  padding: 1em;
+}
+ul li {
+  margin: 1em;
+}
 
-  ul li a:hover,ul li a:focus{
-    box-shadow:10px 10px 7px rgba(0,0,0,.7);
-    transform: scale(1.25);
-    position:relative;
-    z-index:5;
-  }
-  ul li a{
-    text-decoration:none;
-    color:#000;
-    background:#ffc;
-    display:block;
-    height:10em;
-    width:10em;
-    padding:1em;
-    box-shadow: 5px 5px 7px rgba(33,33,33,.7);
-    transition: transform .15s linear;
-  }
+ul li:nth-child(even) a {
+  position: relative;
+  top: 5px;
+  background: #cfc;
+}
+ul li:nth-child(3n) a {
+  position: relative;
+  top: -5px;
+  background: #ccf;
+}
 
+ul li a {
+  transform: rotate(-6deg);
+}
 
-  .container {
-      margin-left: 5%;
+ul li:nth-child(even) a {
+  transform: rotate(4deg);
+  position: relative;
+  top: 5px;
+}
+ul li:nth-child(3n) a {
+  transform: rotate(-3deg);
+  position: relative;
+  top: -5px;
+}
+ul li:nth-child(5n) a {
+  transform: rotate(5deg);
+  position: relative;
+  top: -10px;
+}
 
-  }
-  .announcementstitle {
-      background-image: url("../utils/images/corkboard.jpg") !important;
-      display: block; 
-      max-width: 100%;
-      height: auto;
-  }
+ul li a {
+  text-decoration: none;
+  color: #000;
+  background: #ffc;
+  display: block;
+  height: 10em;
+  width: 10em;
+  padding: 1em;
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+}
 
-  .comments {
-      margin-bottom: 40%;
-  }
+ul li a:hover,
+ul li a:focus {
+  box-shadow: 10px 10px 7px rgba(0, 0, 0, 0.7);
+  transform: scale(1.25);
+  position: relative;
+  z-index: 5;
+}
 
-  body {
-   
-    background-color: #66CCFF;
-    font-family: sans-serif;
-  }
-  #container {
-    display: flex;
-    justify-content: center;
-  }
+ul li a {
+  text-decoration: none;
+  color: #000;
+  background: #ffc;
+  display: block;
+  height: 10em;
+  width: 10em;
+  padding: 1em;
+  box-shadow: 5px 5px 7px rgba(33, 33, 33, 0.7);
+  transition: transform 0.15s linear;
+}
 
-  
+.container {
+  margin-left: 5%;
+}
+
+.announcementstitle {
+  background-image: url("../utils/images/corkboard.jpg") !important;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.comments {
+  margin-bottom: 40%;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+}
+
+.eventInfo {
+  background-image: linear-gradient(
+    45deg,
+    rgb(0, 219, 222),
+    rgb(255, 255, 255) 15%
+  );
+  box-shadow: rgb(0, 219, 222);
+  box-shadow: 7px -7px 24px 2px rgb(0, 219, 222);
+  border-color: rgb(0, 219, 222);
+  border-style: solid;
+  background-image: linear-gradient(
+    45deg,
+    rgb(0, 219, 222),
+    rgb(255, 255, 255) 15%
+  );
+  background-image: linear-gradient(
+    to right top,
+    rgb(0, 219, 222),
+    rgb(252, 0, 255) 99%
+  );
+  background-image: linear-gradient(
+    to right,
+    rgb(0, 219, 222),
+    rgb(252, 0, 255)
+  );
+}
+.with-linear-gradient {
+  border-style: solid;
+  border-width: 10px;
+  border-image: linear-gradient(45deg, rgb(0, 219, 222), rgb(252, 0, 255)) 1;
+  border-radius: 1em;
+}
+
+.gradientBox {
+  padding: 30% 2em;
+  box-sizing: border-box;
+  color: rgb(73, 0, 122);
+  background: #fff;
+  background-clip: padding-box;
+  /* !importanté */
+  border: solid 5px transparent;
+  /* !importanté */
+  border-radius: 1em;
+}
+.gradientBox:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -5px;
+  /* !importanté */
+  border-radius: inherit;
+  /* !importanté */
+  background: linear-gradient(to right, rgb(0, 219, 222), rgb(252, 0, 255));
+}
+.gradient-box {
+  /* display: flex; */
+  /* align-items: center; */
+  /* width: 90%; */
+  /* margin: auto; */
+  /* max-width: 22em; */
+  /* position: relative; */
+  padding: 30% 2em;
+  box-sizing: border-box;
+  color: rgb(73, 0, 122);
+  background: #fff;
+  background-clip: padding-box;
+  /* !importanté */
+  border: solid 5px transparent;
+  /* !importanté */
+  border-radius: 1em;
+}
+.gradient-box:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -5px;
+  /* !importanté */
+  border-radius: inherit;
+  /* !importanté */
+  background: linear-gradient(to right, rgb(0, 219, 222), rgb(252, 0, 255));
+}
