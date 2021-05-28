@@ -7,6 +7,9 @@ export default {
   checkUser: function(userData){
     return axios.post("/api/users/login", userData)
   },
+  hiUser: function(id){
+    return axios.get("api/users/" + id)
+  },
   byeUser: function(){
     return axios.post("api/users/logout")
   },
@@ -28,23 +31,23 @@ export default {
   },
 
   createList: function(id, listData) {
-    return axios.post("/api/events/" +id, listData)
+    return axios.post("/api/events/" +id+ "/lists/", listData)
   },
   updateList: function (id, list_id, listData) {
-    return axios.put("/api/event/" + id + "/list/" +list_id, listData)
+    return axios.put("/api/event/" + id + "/lists/" +list_id, listData)
   },
   deleteList: function (id, list_id) {
-    return axios.delete("/api/events/" + id + "/list/" + list_id)
+    return axios.delete("/api/events/" + id + "/lists/" + list_id)
   },
   
-  addListItem: function(id, list_id) {
-    return axios.post("/api/events/" + id + "/list/" + list_id + "/items/")
+  addListItem: function(id, list_id, itemData) {
+    return axios.post("/api/events/" + id + "/lists/" + list_id + "/items/", itemData)
   },
   updateListItem: function(id, list_id, item_id, listItemData) {
-    return axios.put("/api/events/" + id + "/list/" + list_id + "/items/" + item_id, listItemData)
+    return axios.put("/api/events/" + id + "/lists/" + list_id + "/items/" + item_id, listItemData)
   },
   deleteListItem: function(id, list_id, item_id, listItemData) {
-    return axios.delete("/api/events/" + id + "/list/" + list_id + "/items/" + item_id, listItemData)
+    return axios.delete("/api/events/" + id + "/lists/" + list_id + "/items/" + item_id, listItemData)
   },
 
   

@@ -69,11 +69,12 @@ module.exports = {
   addList: function(req, res){
     // req.params.id --> event._id = "60ad393469e56e0a903434bc"
     // req.body = { listName: "Food", }
+    console.log(req.body)
     db.Events
     .updateOne({ _id: req.params.id }, 
       {$push: { lists: {listName: req.body.listName, items: []}}})
     .then(dbEventData => res.json(dbEventData))
-    .catch(err => res.status(422).json(err));
+    .catch(err => res.status(422).json("error=" + err));
   },
   updateList: function(req, res){
     // req.params.id -> event._id
@@ -112,7 +113,7 @@ module.exports = {
           $push: { "lists.$[list].items": req.body.item }
         }, {
         arrayFilters: [{
-          "list.listName": req.body.listName,
+          // "list.listName": req.body.listName,
           "list._id": req.params.list_id       
         }]
       })
