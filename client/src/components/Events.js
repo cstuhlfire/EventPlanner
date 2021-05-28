@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 
 
 function Events(props) {
+  function handleAddEvent(eventId) {
+    console.log("Event id: "+ eventId);
+  }
+
   return (
     <div>
       {/* <div className="cc columns features"> */}
@@ -26,7 +30,7 @@ function Events(props) {
             </div>
             <div>
               <button className="joinBtn">
-                <AddIcon></AddIcon>
+                <AddIcon onClick={() => handleAddEvent(props._id)}></AddIcon>
               </button>
             </div>
             <div className="card-content">

@@ -30,6 +30,8 @@ function App() {
           <Route path="/event/:id" component={ViewEvent}>
            <ViewEvent />
           </Route>
+          <Route path="/*" component={Home}>
+          </Route>
           </Switch>
         </Router>
       </>
