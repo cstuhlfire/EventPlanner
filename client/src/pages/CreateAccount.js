@@ -3,6 +3,7 @@ import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import LockIcon from '@material-ui/icons/Lock';
 import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import PhoneIcon from '@material-ui/icons/Phone';
+import { Link } from "react-router-dom";
 import "./CreateAccount.css";
 import API from "../utils/API"
 
@@ -82,9 +83,11 @@ function CreateAccount() {
             </div>
                 <div className="field">
                     <p className="control">
-                     <button className="button is-success" onClick={saveUser}>
+                    <Link to="/login" onClick={saveUser} className="button is-success" style={{textDecoration: "none"}}>Login</Link>
+
+                     {/* <button className="button is-success" onClick={saveUser}>
                          Login
-                     </button>
+                     </button> */}
                     </p>
                 <div>
                     <p id="createLink">Already have an account? Login <a href="/login">here</a>!</p>

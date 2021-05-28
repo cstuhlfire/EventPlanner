@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import "./CreateEvent.css"
 import API from "../utils/API";
 
@@ -17,13 +18,9 @@ function CreateEvent() {
         let imageinput = document.querySelector(`#image`).value;
         
         let dateTimeinput = `${dateinput} ${timeinput}`
-        console.log(nameinput)
-        console.log(locationinput)
-        console.log(dateinput) 
+ 
         console.log(dateTimeinput) 
         console.log(timeinput) 
-        console.log(descinput)
-        console.log(imageinput)
 
         API.createEvent({
             eventName: nameinput,
@@ -42,7 +39,7 @@ function CreateEvent() {
 
 
     return (
-    <div className="container">
+    <div className="container custom">
         <div className="h1">
             <h1>Create Event</h1>
         </div>
@@ -79,10 +76,10 @@ function CreateEvent() {
             <div className="select">
             <select id="image">
                 <option>Select dropdown</option>
-                <option value="confetti">Get together</option>
-                <option value="balloons">Birthday</option>
-                <option value="pool">Graduation</option>
-                <option value="balloons">Wedding</option>
+                <option value="confetti.jpg">Get together</option>
+                <option value="balloons.jpg">Birthday</option>
+                <option value="pool.jpg">Graduation</option>
+                <option value="balloons.jpg">Wedding</option>
             </select>
             </div>
         </div>
@@ -91,12 +88,13 @@ function CreateEvent() {
         <div className="field">
         <label className="label">Event Description</label>
         <div className="control">
-            <textarea className="textarea" placeholder="Textarea" id="description"></textarea>
+            <textarea className="input" placeholder="Textarea" id="description"></textarea>
         </div>
         </div>
         <div className="field is-grouped">
         <div className="btnCont control">
-            <button className="subbttn button is-link" onClick={saveEvent}>Submit</button>
+            {/* <button className="subbttn button is-link" onClick={saveEvent}>Submit</button> */}
+            <Link to="/" onClick={saveEvent} className="subbttn button is-link" style={{textDecoration: "none"}}>Create</Link>
         </div>
         </div>   
     </div>

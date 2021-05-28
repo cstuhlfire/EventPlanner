@@ -248,8 +248,8 @@ module.exports = {
     //       attendee:  "60ad0b20bbba44045a0a0eaf", host: false
     //       }
     db.Events
-    .findByIdAndUpdate({_id: req.params.id},
-      {$push: {attendees: req.body.attendee}},
+    .findByIdAndUpdate({_id: req.params.id}, 
+      {$push: {attendees: req.body}},
       {new: true})
     .then(data => res.json(data))
     .catch(err => res.status(422).json(err))

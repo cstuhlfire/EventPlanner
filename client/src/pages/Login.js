@@ -36,6 +36,7 @@ import API from "../utils/API";
                                         loginFailed: false});
             
             sessionStorage.setItem("loginInfo", res.data.user_id);
+            sessionStorage.setItem("loginName", res.data.user);
             return true;
         })
         .catch((err) => {
@@ -51,7 +52,7 @@ import API from "../utils/API";
             <div className="cont columns">
             <div className="column ">        
                  {/* Form Starts Here */}
-            <div clasName="column">
+            <div className="column">
                 <div>
                     <h3 className="head">Login</h3>
                 </div>

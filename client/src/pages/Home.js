@@ -7,6 +7,7 @@ import utils from "../utils/utils";
 
 
 function Home() {
+  let userId = (sessionStorage.getItem("loginInfo"));
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ function Home() {
         <div>
             <div className="testimonial">
             <svg>
-              <text x="50%" y="60%"  text-anchor="middle">
+              <text x="50%" y="60%"  textAnchor="middle">
                It's Party Time
               </text>
             </svg>
@@ -47,7 +48,7 @@ function Home() {
         {/* <div className="column> */}
         <div className="columns is-desktop is-multiline" style={{paddingLeft: "15px"}}>
             {/* { events.length > 0 && events.map(event => */}
-          {events.map((event)=> <Events title={event.eventName} date={utils.formatDate(event.eventDateTime)} time={utils.formatTime(event.eventDateTime)} location={event.location} image={event.eventImage} _id={event._id}></Events>)}
+          {events.map((event)=> <Events key={Math.random} title={event.eventName} date={utils.formatDate(event.eventDateTime)} time={utils.formatTime(event.eventDateTime)} location={event.location} image={event.eventImage} _id={event._id}></Events>)}
         </div>
       </div>
     </div>
