@@ -18,11 +18,10 @@ function ViewEvent() {
   const [chosenListItems, setChosenListItems] = useState([]);
   const params = useParams();
   const id = params.id;
-  // let userId = (sessionStorage.getItem("loginInfo"));
+  let userId = (sessionStorage.getItem("loginInfo"));
   const [currentUser, setCurrentUser] = useState("");
 
   useEffect(() => {
-    setCurrentUser("60b08331637701535d45f188");
     loadEvent();
   }, []);
 
@@ -45,6 +44,7 @@ function ViewEvent() {
     console.log("enteredLoadEvent");
     API.getOneEvent(id)
       .then((res) => {
+        setCurrentUser(userId);
         setChosenEvent(res.data);
         setLists(res.data.lists);
         setComments(res.data.comments);
@@ -105,6 +105,27 @@ function ViewEvent() {
     setAnnouncements([announcement, ...announcements]);
     loadEvent();
 
+  }
+  function makeComment(event){
+    event.preventDefault();
+    let commentInput = document.querySelector("#commText").value;
+    console.log(commentInput);
+    let comment = {
+      author: currentUser,
+      text: commentInput,
+    };
+    API.addComment(id, comment)
+    .catch((err) => console.log(err));
+    setComments([comment, ...comments]);
+    loadEvent();
+
+  }
+  function deleteComment(event, commentId){
+    event.preventDefault();
+    API.deleteComment(id, commentId)
+    .catch((err) => console.log(err));
+    setComments([(comments.filter(comment => comment._id !== commentId))])
+    // loadEvent();
   }
 
   function updateListItem(event, listIdToUpdate, item, update) {
@@ -350,56 +371,11 @@ function ViewEvent() {
                       {comment.text}
                       <br></br>
                       <small>
-                        <a>Like</a> · <a>Reply</a> · 3 hrs
+                        {/* <a onClick={(e) => deleteComment(e, comment._id)}>Delete</a> */}
                       </small>
                     </p>
                   </div>
                 ))}
-                {/* <div className="content">
-                                        <p>
-                                            <strong>Barbara Middleton</strong>
-                                            <br></br>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
-                                            <br></br>
-                                            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-                                        </p>
-                                    </div>
-
-                                    <article className="media">
-
-                                        <div className="commentmedia-content">
-                                            <div className="content">
-                                                <p>
-                                                    <strong>Sean Brown</strong>
-                                                    <br></br>
-                                                    Donec sollicitudin urna eget eros malesuada sagittis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam blandit nisl a nulla sagittis, a lobortis leo feugiat.
-                                                    <br></br>
-                                                    <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-                                                </p>
-                                            </div>
-                                            <article className="media">
-                                                Vivamus quis semper metus, non tincidunt dolor. Vivamus in mi eu lorem cursus ullamcorper sit amet nec massa.
-                                            </article>
-                                            <article className="media">
-                                                Morbi vitae diam et purus tincidunt porttitor vel vitae augue. Praesent malesuada metus sed pharetra euismod. Cras tellus odio, tincidunt iaculis diam non, porta aliquet tortor.
-                                            </article>
-                                        </div>
-
-                                    </article>
-
-                                    <article className="media">
-                                        <div className="commentmedia-content">
-                                            <div className="content">
-                                                <p>
-                                                    <strong>Kayli Eunice</strong>
-                                                    <br></br>
-                                                    Sed convallis scelerisque mauris, non pulvinar nunc mattis vel. Maecenas varius felis sit amet magna vestibulum euismod malesuada cursus libero. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus lacinia non nisl id feugiat.
-                                                    <br></br>
-                                                    <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </article> */}
               </div>
             </article>
 
@@ -409,13 +385,14 @@ function ViewEvent() {
                   <p className="control">
                     <textarea
                       className="textarea"
+                      id="commText"
                       placeholder="Add a comment..."
                     ></textarea>
                   </p>
                 </div>
                 <div className="field">
                   <p className="control">
-                    <button className="button">Post comment</button>
+                    <button className="button" onClick={(e) => makeComment(e)}>Post comment</button>
                   </p>
                 </div>
               </div>
