@@ -17,7 +17,7 @@ function Home() {
     API.getEvents()
       .then(res => {
         // setEvents(res.data) - potentially
-        console.log(res.data);
+        //console.log(res.data);
         setEvents(res.data);
       })
     .catch(err => console.log(err));
@@ -37,7 +37,7 @@ function Home() {
                 <input className=" i input is-primary" type="text" placeholder="Search Event">
                 </input>
              <button className="bt is-left">
-               <SearchIcon></SearchIcon>               
+               <SearchIcon/>               
             </button>
             </div>
 
@@ -45,7 +45,7 @@ function Home() {
          
         {/* map event component here */}
         {/* <div className="column> */}
-        <div className="columns is-desktop">
+        <div className="columns is-desktop is-multiline" style={{paddingLeft: "15px"}}>
             {/* { events.length > 0 && events.map(event => */}
           {events.map((event)=> <Events title={event.eventName} date={utils.formatDate(event.eventDateTime)} time={utils.formatTime(event.eventDateTime)} location={event.location} image={event.eventImage} _id={event._id}></Events>)}
         </div>

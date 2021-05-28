@@ -18,7 +18,6 @@ module.exports = {
   },
   create: function(req, res) {
 
-    console.log(req.body);
     const newUser = new db.Users (req.body);
     newUser
       .save()
@@ -53,23 +52,28 @@ module.exports = {
   login: function(req, res) {
     db.Users.findOne({ username: req.body.username })
       .then ((user) => {
-        console.log(user);
-        if (!user) {
-          console.log("wrong user")
+         if (!user) {
           res
             .status(400)
             .json({ message: 'Incorrect email or password, please try again' });
           return;
         }
         user.comparePassword(req.body.password, function(err, isMatch) {
-          if (err) throw err;
-          console.log(req.body.password + ":", isMatch); 
+          if (err) {
+            console.log("Error logging in.");
+
+            res.status(400)
+              .json({message: "Incorrect username or password, please try again."});
+          };
+
           if (!isMatch) {
-            console.log("wrong password")
-            res
-              .status(400)
-              .json({ message: 'Incorrect email or password, please try again' });
+            console.log("Incorrect login.");
+
+            res.status(400)
+              .json({ message: "Incorrect username or password, please try again." });
+
             return;
+
           } else {
             console.log("Success!");
 
@@ -79,16 +83,20 @@ module.exports = {
               req.session.logged_in = true;
             })
 
-            res.json({ user: user.username, message: 'You are now logged in!' });
+            res.json({ user: user.username, 
+                      user_id: user._id,  
+                      logged_in: true,
+                      message: 'Welcome! You are logged in as: '+user.username });
           }
         });
         
       })
-      .then (() => {
-        console.log("later");
-      })
+      // .then (() => {
+      //   console.log("later");
+      // })
       .catch ((err) => {
         console.log(err);
+        res.json({message: "Error: "+err});
       })
   },  
   logout: function (req, res) {

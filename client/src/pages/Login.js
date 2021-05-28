@@ -1,5 +1,5 @@
-import React from 'react'
-import "./Login.css"
+import React, {useState} from 'react';
+import "./Login.css";
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
 import LockIcon from '@material-ui/icons/Lock';
 import API from "../utils/API";
@@ -7,23 +7,43 @@ import API from "../utils/API";
 
  function Login() {
 
+    let [loginObj, setLoginObj] = useState({username: "",
+                                            password: "",
+                                            userId: "",
+                                            loggedIn: false,
+                                            loginFailed: false});
+    
+    // Handles updating component state when the user types into the input field
+    function handleInputChange(event) {
+      const { name, value } = event.target;
+      setLoginObj({...loginObj, [name]: value})
+    };
+
     function logUserIn (event) {
         event.preventDefault();
 
-        let userinput = document.querySelector(`#username`).value;
-        let passwordinput = document.querySelector(`#password`).value;
-        console.log(userinput);
-        console.log(passwordinput);
-
+        // let userinput = document.querySelector(`#username`).value;
+        // let passwordinput = document.querySelector(`#password`).value;
+       
         API.checkUser({
-            username: userinput,
-            password: passwordinput
+            username: loginObj.username,
+            password: loginObj.password
+        })
+        .then((res) => {
+            setLoginObj({...loginObj, username: res.data.user, 
+                                        userId: res.data.user_id, 
+                                        loggedIn: true,
+                                        loginFailed: false});
+            
+            sessionStorage.setItem("loginInfo", res.data.user_id);
+            return true;
+        })
+        .catch((err) => {
+            setLoginObj({...loginObj, loggedIn: false,
+                                    loginFailed: true});
+            return false;
         })
     } 
-
-
-
-
 
     return (
     <div id="column">    
@@ -38,8 +58,14 @@ import API from "../utils/API";
                  <div className="email field">
                      <p className="control has-icons-left has-icons-right">
                         <input 
-                            className="box email-input input" type="email" id="username" placeholder="Username">
+                            className="box email-input input" 
+                            name="username" 
+                            onChange={handleInputChange}
+                            type="email" 
+                            id="username" 
+                            placeholder="Username">
                         </input>
+
                             <span className="icon is-small is-left">
                                 <PermIdentityIcon></PermIdentityIcon>
                             </span>
@@ -50,12 +76,25 @@ import API from "../utils/API";
                 </div>
              <div className="field">
                 <p className="email control has-icons-left">
-                    <input className="box pass-input input" type="password" id="password" placeholder="Password"></input>
+                    <input className="box pass-input input" 
+                            name="password" 
+                            onChange={handleInputChange}
+                            type="password" 
+                            id="password" 
+                            placeholder="Password">
+                    </input>
+
                     <span className="icon is-small is-left">
                         <LockIcon style={{fontSize: "large"}}></LockIcon>
                     </span>
                 </p>
                 </div>
+                    {(loginObj.loginFailed) ?
+                        <p style={{visibility: "visible"}}>Login failed. Please try again.</p>
+                        : (loginObj.loggedIn) ?
+                        <p style={{visibility: "visible"}}>Welcome! You are logged in as {loginObj.username}.</p>
+                        :<p style={{visibility: "hidden"}}>Login</p>
+                    } 
                 <div className="field">
                     <p className="control">
                      <button className="button is-success" onClick={logUserIn}>

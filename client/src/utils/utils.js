@@ -11,8 +11,7 @@ export default  {
           day: "numeric"
         })
           .format(new Date(dbDate));
-  
-    console.log(newDate);
+
     return (newDate);
   },
   formatTime: function(dbDate) {
@@ -27,7 +26,6 @@ export default  {
         })
           .format(new Date(dbDate));
   
-    console.log(newTime);
     return (newTime);
   }
 };
