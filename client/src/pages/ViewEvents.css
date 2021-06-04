@@ -44,6 +44,12 @@ h1, h3, h4 {
   background-color: rgba(255, 255, 255, .7);
 }
 
+.listitem-content::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid rgb(255, 255, 255); /* should match background, can't be transparent */
+  background-color: rgba(0, 219, 222, .7);
+}
+
 .listItemCons{
   color:rgb(73, 0, 122);
   background-image: linear-gradient(

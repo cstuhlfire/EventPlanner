@@ -218,7 +218,7 @@ function ViewEvent() {
                       className="ievent input is-primary"
                       type="text"
                       id="aText"
-                      placeholder={`Make an announcement to ${chosenList.listName}...`}
+                      placeholder="make it known"
                     ></input>
                   </div>
                   <div className="control">
@@ -309,12 +309,12 @@ function ViewEvent() {
                                 placeholder={`add to ${chosenList.listName} ...`}>
                             </input>
                             <button onClick={(e) => saveListItem(e, chosenListId, chosenList.listName)}>submit</button> */}
-                <div className="announcement-content">
+                <div className="announcement-content listitem-content">
                 {chosenListItems.map((item) => (
                   <div className="column listItemCons">
                     <h4>{item.itemName}</h4>
                     {item.assigned ? (
-                      <h5>Assigned to {item.assignedTo.username}!</h5>
+                      <h5>Assigned to: {item.assignedTo.username}</h5>
                       ) : (
                         <>
                         <button

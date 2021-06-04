@@ -24,7 +24,8 @@ svg text {
 
 .bt {
     height: 40px;
-    margin-top: 3%;
+    padding: 0 4px;
+    /* margin-top: 3%; */
     border-radius: 6%;
     background-color: blueviolet;
     border:aqua;

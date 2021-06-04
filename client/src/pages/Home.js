@@ -37,7 +37,7 @@ function Home() {
             <div className="search">
                 <input className=" i input is-primary" type="text" placeholder="Search Event">
                 </input>
-             <button className="bt is-left">
+             <button className="bt is-left" style={{marginTop: "3%"}}>
                <SearchIcon/>               
             </button>
             </div>
