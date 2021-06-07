@@ -20,7 +20,7 @@ import API from "../utils/API";
     };
 
     function logUserIn (event) {
-        event.preventDefault();
+        // event.preventDefault();
 
         // let userinput = document.querySelector(`#username`).value;
         // let passwordinput = document.querySelector(`#password`).value;
@@ -103,7 +103,7 @@ import API from "../utils/API";
                      </button>
                     </p>
                 <div>
-                    <p id="createLink">Dont have an account? Create one <a href="/CreateAccount">here</a></p>
+                    <p id="createLink">Don't have an account? Create one <a href="/CreateAccount">here</a></p>
                 </div>
                 </div>
                 </div>

@@ -21,7 +21,7 @@ Run "npm i", then "npm start" to run the development server locally. Access the 
 Create user/login. View events. Create events. View event details to voluneer to help or to communicate about the event planning.
 
 ## Screenshot
-![Screenshot](./ScreenShot.png)
+![Screenshot](./Screenshot.PNG)
 
 ## License_Details
 
